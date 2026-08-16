@@ -2,7 +2,9 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Scalar.AspNetCore;
 using Users.Api;
+using Users.Api.Endpoints;
 using Users.Application.Abstractions;
 using Users.Application.Households;
 using Users.Application.Users;
@@ -57,8 +59,10 @@ app.UseAuthorization();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
-
+app.MapUserEndpoints();
+app.MapHouseholdEndpoints();
 app.Run();
