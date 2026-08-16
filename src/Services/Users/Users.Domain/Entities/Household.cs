@@ -18,7 +18,14 @@ namespace Users.Domain.Entities
         private readonly List<HouseholdMember> _members;
 
         public IReadOnlyCollection<HouseholdMember> Members => _members.AsReadOnly();
-
+        private Household(Guid id, string name, InviteCode inviteCode, DateTime createdAt)
+        {
+            Id = id;
+            Name = name;
+            InviteCode = inviteCode;
+            CreatedAt = createdAt;
+            _members = new List<HouseholdMember>();
+        }
         private Household(Guid id, string name, InviteCode inviteCode, DateTime createdAt, List<HouseholdMember> members)
         {
             Id = id;
