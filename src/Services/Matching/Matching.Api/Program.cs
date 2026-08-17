@@ -36,7 +36,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
-builder.Services.AddAWSService<IAmazonSQS>();
+builder.Services.AddAWSService<IAmazonSQS>(); 
+builder.Services.AddSingleton<IAmazonSQS>(_ => new AmazonSQSClient(
+    new Amazon.Runtime.BasicAWSCredentials(
+        builder.Configuration["AWS:AccessKey"],
+        builder.Configuration["AWS:SecretKey"]),
+    new AmazonSQSConfig { RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]) }));
 builder.Services.AddScoped<IMatchEventPublisher, MatchEventPublisher>();
 builder.Services.AddAuthorization();
 builder.Services.AddProblemDetails();
