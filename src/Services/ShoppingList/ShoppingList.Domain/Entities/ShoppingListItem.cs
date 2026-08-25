@@ -7,16 +7,16 @@ namespace ShoppingList.Domain.Entities
     public class ShoppingListItem
     {
         public Guid Id { get; }
-        public Guid HouseHoldId { get; }
+        public Guid HouseholdId { get; }
         public Guid RecipeId { get; }
         public string IngredientName { get; }
         public string Measure { get; }
         public DateTime AddedAt { get; }
 
-        private ShoppingListItem(Guid id, Guid houseHoldId, Guid recipeId, string ingredientName, string measure, DateTime addedAt)
+        private ShoppingListItem(Guid id, Guid householdId, Guid recipeId, string ingredientName, string measure, DateTime addedAt)
         {
             Id = id;
-            HouseHoldId = houseHoldId;
+            HouseholdId = householdId;
             RecipeId = recipeId;
             IngredientName = ingredientName;
             Measure = measure;
