@@ -24,6 +24,16 @@ namespace Recipes.Domain.Entities
             CacheAt = cacheAt;
             ImageUrl = imageUrl;
         }
+        private Recipe(Guid id, string mealDbId, string name, string instructions, DateTime cacheAt, string imageUrl)
+        {
+            Id = id;
+            MealDbId = mealDbId;
+            Name = name;
+            Instructions = instructions;
+            CacheAt = cacheAt;
+            ImageUrl = imageUrl;
+            Ingredients = new List<RecipeIngredient>();
+        }
         public static Recipe Create(string mealDbId, string name, string instructions, IReadOnlyCollection<RecipeIngredient> ingredients, string imageUrl)
         {
             Guid id = Guid.NewGuid();

@@ -10,21 +10,28 @@ namespace Recipe.Domain.Entities
         public Guid Id { get; }
         public Guid HouseholdId {  get; }
         public DateTime GeneratedAt { get; }
-        private List<Guid> _recipesId;
-        public IReadOnlyCollection<Guid> RecipesId => _recipesId.AsReadOnly();
+        private List<Guid> _recipeIds;
+        public IReadOnlyCollection<Guid> RecipeIds => _recipeIds.AsReadOnly();
 
-        private Deck(Guid id, Guid householdId, DateTime generatedAt, List<Guid> recipesId)
+        private Deck(Guid id, Guid householdId, DateTime generatedAt, List<Guid> recipeIds)
         {
             Id = id;
             HouseholdId = householdId;
             GeneratedAt = generatedAt;
-            _recipesId = recipesId;
+            _recipeIds = recipeIds;
         }
-        public static Deck Create(Guid householdId, IEnumerable<Guid> recipesId)
+        private Deck(Guid id, Guid householdId, DateTime generatedAt)
+        {
+            Id = id;
+            HouseholdId = householdId;
+            GeneratedAt = generatedAt;
+            _recipeIds = new List<Guid>();
+        }
+        public static Deck Create(Guid householdId, IEnumerable<Guid> recipeIds)
         {
             Guid id = Guid.NewGuid();
             DateTime generatedAt = DateTime.UtcNow;
-            return new Deck(id, householdId, generatedAt, recipesId.ToList());
+            return new Deck(id, householdId, generatedAt, recipeIds.ToList());
         }
         public bool IsExpired(DateTime now)
         {

@@ -24,7 +24,7 @@ namespace Recipes.Application.Decks
             var existingDeck = await _deckRepository.GetMostRecentAsync(householdId);
             if (existingDeck is not null && !existingDeck.IsExpired(DateTime.UtcNow))
             {
-                var recipes = await _recipeRepository.GetByIdsAsync(existingDeck.RecipesId);
+                var recipes = await _recipeRepository.GetByIdsAsync(existingDeck.RecipeIds);
                 var summaries = recipes.Select(r => new RecipeSummary(r.Id, r.Name, r.ImageUrl)).ToList();
                 return new GetOrGenerateDeckResult(existingDeck.Id, summaries);
             }
@@ -53,11 +53,11 @@ namespace Recipes.Application.Decks
                     pool.AddRange(newRecipes);
                 }
 
-                var excludedRecipeIds = existingDeck?.RecipesId ?? Array.Empty<Guid>();
+                var excludedRecipeIds = existingDeck?.RecipeIds ?? Array.Empty<Guid>();
                 var recipeIds = DeckGenerator.GenerateRecipeIds(pool.Select(r => r.Id).ToList(), excludedRecipeIds.ToList(), 20);
 
                 var deck = Deck.Create(householdId, recipeIds);
-                await _deckRepository.AddASync(deck);
+                await _deckRepository.AddAsync(deck);
 
                 var selectedRecipes = pool.Where(r => recipeIds.Contains(r.Id));
                 return new GetOrGenerateDeckResult(deck.Id, selectedRecipes.Select(r => new RecipeSummary(r.Id, r.Name, r.ImageUrl)).ToList());
