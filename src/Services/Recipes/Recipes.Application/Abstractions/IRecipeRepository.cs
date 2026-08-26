@@ -10,5 +10,6 @@ namespace Recipes.Application.Abstractions
         public Task<IReadOnlyCollection<Recipes.Domain.Entities.Recipe>> GetAllAsync();
         public Task AddRangeAsync(IEnumerable<Recipes.Domain.Entities.Recipe> recipes);
         public Task<IReadOnlyCollection<Recipes.Domain.Entities.Recipe>> GetByIdsAsync(IEnumerable<Guid> ids);
+        public Task<Recipes.Domain.Entities.Recipe?> GetByIdAsync(Guid id);
     }
 }

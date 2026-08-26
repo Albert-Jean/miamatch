@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Recipes.Application.Abstractions;
 using Recipes.Application.Decks;
 
 namespace Recipes.Api.Endpoints
@@ -20,6 +21,23 @@ namespace Recipes.Api.Endpoints
                     return Results.Forbid();
                 }
             }).RequireAuthorization();
+            app.MapGet("/recipes/{id}", async (Guid id, IRecipeRepository recipeRepository) =>
+            {
+                var recipe = await recipeRepository.GetByIdAsync(id);
+                if (recipe is null)
+                {
+                    return Results.NotFound();
+                }
+
+                var response = new RecipeDetailsResponse(
+                    recipe.Id,
+                    recipe.Name,
+                    recipe.Ingredients.Select(i => new RecipeIngredientResponse(i.name, i.measure)).ToList());
+
+                return Results.Ok(response);
+            });
         }
     }
+    public sealed record RecipeDetailsResponse(Guid Id, string Name, IReadOnlyCollection<RecipeIngredientResponse> Ingredients);
+    public sealed record RecipeIngredientResponse(string Name, string Measure);
 }
