@@ -33,9 +33,12 @@ namespace Matching.Infrastructure.Persistence.Messaging
                 MatchedAt = match.MatchedAt
             };
             var json = System.Text.Json.JsonSerializer.Serialize(message);
+            var topicArn = _configuration["Sns:MatchCreatedTopicArn"];
+            Console.WriteLine($"[MatchEventPublisher] TopicArn lu : '{topicArn}'");
+
             await _sns.PublishAsync(new PublishRequest
             {
-                TopicArn = _configuration["Sns:MatchCreatedTopicArn"],
+                TopicArn = topicArn,
                 Message = json
             });
         }
