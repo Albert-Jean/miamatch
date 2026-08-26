@@ -1,4 +1,5 @@
-using Amazon.SQS;
+
+using Amazon.SimpleNotificationService;
 using Matching.Api.Endpoints;
 using Matching.Application.Abstractions;
 using Matching.Application.Swipes;
@@ -34,11 +35,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true
         };
     });
-builder.Services.AddSingleton<IAmazonSQS>(_ => new AmazonSQSClient(
+builder.Services.AddSingleton<IAmazonSimpleNotificationService>(_ => new AmazonSimpleNotificationServiceClient(
     new Amazon.Runtime.BasicAWSCredentials(
         builder.Configuration["AWS:AccessKey"],
         builder.Configuration["AWS:SecretKey"]),
-    new AmazonSQSConfig { RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]) }));
+    new AmazonSimpleNotificationServiceConfig { 
+        RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]) })); 
 builder.Services.AddScoped<IMatchEventPublisher, MatchEventPublisher>();
 builder.Services.AddAuthorization();
 builder.Services.AddProblemDetails();
