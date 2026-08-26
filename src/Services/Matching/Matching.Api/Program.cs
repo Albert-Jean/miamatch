@@ -34,9 +34,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true
         };
     });
-
-builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
-builder.Services.AddAWSService<IAmazonSQS>(); 
 builder.Services.AddSingleton<IAmazonSQS>(_ => new AmazonSQSClient(
     new Amazon.Runtime.BasicAWSCredentials(
         builder.Configuration["AWS:AccessKey"],

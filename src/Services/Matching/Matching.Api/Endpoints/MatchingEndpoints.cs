@@ -39,5 +39,5 @@ namespace Matching.Api.Endpoints
             }).RequireAuthorization();
         }
     }
-    public sealed record CreateSwipeRequest(Guid HouseholdId, Guid RecipeId, Guid DeckId, bool Liked);    
+    public sealed record CreateSwipeRequest(Guid HouseholdId, Guid RecipeId, Guid DeckId, bool Liked);
 }

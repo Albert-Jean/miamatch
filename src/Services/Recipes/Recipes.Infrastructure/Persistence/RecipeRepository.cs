@@ -27,5 +27,10 @@ namespace Recipes.Infrastructure.Persistence
             var result = await _context.Recipes.Where(r => ids.Contains(r.Id)).ToListAsync();
             return result;
         }
+        public async Task<Recipes.Domain.Entities.Recipe?> GetByIdAsync(Guid id)
+        {
+            var result = await _context.Recipes.FirstOrDefaultAsync(r => r.Id == id);
+            return result;
+        }
     }
 }
