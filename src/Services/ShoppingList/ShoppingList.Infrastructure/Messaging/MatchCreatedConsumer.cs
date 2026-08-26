@@ -27,32 +27,39 @@ namespace ShoppingList.Infrastructure.Messaging
             var queueUrl = _configuration["SQS:MatchCreatedQueueUrl"];
             while (!stoppingToken.IsCancellationRequested)
             {
-                var response = await _sqs.ReceiveMessageAsync(new ReceiveMessageRequest
+                try
                 {
-                    QueueUrl = queueUrl,
-                    MaxNumberOfMessages = 5,
-                    WaitTimeSeconds = 20
-                }, stoppingToken);
-                foreach (var message in response.Messages)
-                {
-                    try
+                    var response = await _sqs.ReceiveMessageAsync(new ReceiveMessageRequest
                     {
-                        var matchCreatedMessage = System.Text.Json.JsonSerializer.Deserialize<MatchCreatedMessage>(message.Body);
-                        if (matchCreatedMessage is not null)
+                        QueueUrl = queueUrl,
+                        MaxNumberOfMessages = 5,
+                        WaitTimeSeconds = 20
+                    }, stoppingToken);
+
+                    foreach (var message in response.Messages)
+                    {
+                        try
                         {
-                            using var scope = _scopeFactory.CreateScope();
-                            var handler = scope.ServiceProvider.GetRequiredService<AddMatchedRecipeIngredientsHandler>();
-                            await handler.ExecuteAsync(matchCreatedMessage.HouseholdId, matchCreatedMessage.RecipeId);
+                            var matchCreatedMessage = System.Text.Json.JsonSerializer.Deserialize<MatchCreatedMessage>(message.Body);
+                            if (matchCreatedMessage is not null)
+                            {
+                                using var scope = _scopeFactory.CreateScope();
+                                var handler = scope.ServiceProvider.GetRequiredService<AddMatchedRecipeIngredientsHandler>();
+                                await handler.ExecuteAsync(matchCreatedMessage.HouseholdId, matchCreatedMessage.RecipeId);
+                            }
+                            await _sqs.DeleteMessageAsync(queueUrl, message.ReceiptHandle, stoppingToken);
                         }
-                        await _sqs.DeleteMessageAsync(queueUrl, message.ReceiptHandle, stoppingToken);
-                    }
-                    catch (Exception)
-                    {
-                        // message non supprimé, sera retraité au prochain cycle
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"[MatchCreatedConsumer] Erreur : {ex}");
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[MatchCreatedConsumer] Erreur : {ex}");
+                }
             }
-
         }
 
     }

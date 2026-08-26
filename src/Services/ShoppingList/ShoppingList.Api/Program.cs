@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using ShoppingList.Api.Endpoints;
 using ShoppingList.Application.Abstractions;
+using ShoppingList.Application.ShoppingListItems;
 using ShoppingList.Infrastructure;
 using ShoppingList.Infrastructure.Messaging;
 using ShoppingList.Infrastructure.Persistence;
@@ -37,6 +38,7 @@ builder.Services.AddSingleton<IAmazonSQS>(_ => new AmazonSQSClient(
         builder.Configuration["AWS:AccessKey"],
         builder.Configuration["AWS:SecretKey"]),
     new AmazonSQSConfig { RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]) }));
+builder.Services.AddScoped<AddMatchedRecipeIngredientsHandler>();
 builder.Services.AddHostedService<MatchCreatedConsumer>();
 builder.Services.AddHttpClient<IRecipeClient, RecipeClient>(client =>
 {
