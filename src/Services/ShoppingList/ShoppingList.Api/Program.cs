@@ -1,4 +1,5 @@
 using Amazon.SQS;
+using Amazon.Lambda.AspNetCoreServer.Hosting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,12 +8,11 @@ using ShoppingList.Api.Endpoints;
 using ShoppingList.Application.Abstractions;
 using ShoppingList.Application.ShoppingListItems;
 using ShoppingList.Infrastructure;
-using ShoppingList.Infrastructure.Messaging;
 using ShoppingList.Infrastructure.Persistence;
 using ShoppingList.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -39,7 +39,6 @@ builder.Services.AddSingleton<IAmazonSQS>(_ => new AmazonSQSClient(
         builder.Configuration["AWS:SecretKey"]),
     new AmazonSQSConfig { RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]) }));
 builder.Services.AddScoped<AddMatchedRecipeIngredientsHandler>();
-builder.Services.AddHostedService<MatchCreatedConsumer>();
 builder.Services.AddHttpClient<IRecipeClient, RecipeClient>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["Services:RecipesApiBaseUrl"]!);
