@@ -48,12 +48,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true
         };
     });
+// No explicit credentials: the SDK resolves them from the Lambda execution role in AWS
+// and from the local AWS profile in development. The role needs sns:Publish on the topic.
 builder.Services.AddSingleton<IAmazonSimpleNotificationService>(_ => new AmazonSimpleNotificationServiceClient(
-    new Amazon.Runtime.BasicAWSCredentials(
-        builder.Configuration["AWS:AccessKey"],
-        builder.Configuration["AWS:SecretKey"]),
-    new AmazonSimpleNotificationServiceConfig { 
-        RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]) })); 
+    new AmazonSimpleNotificationServiceConfig {
+        RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]) }));
 builder.Services.AddScoped<IMatchEventPublisher, MatchEventPublisher>();
 builder.Services.AddAuthorization();
 builder.Services.AddProblemDetails();
