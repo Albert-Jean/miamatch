@@ -11,7 +11,9 @@ namespace Recipes.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             // The recipes table only held TheMealDB cache entries (English, untagged); the seed
-            // catalog replaces them, so wipe the cache and the decks that reference it.
+            // catalog replaces them, so wipe the cache and the decks that reference it. Matches
+            // resolve their name and image through Recipes.Api, so any match pointing at a wiped
+            // recipe renders blank and should be cleared with it.
             migrationBuilder.Sql("DELETE FROM recipes.decks;");
             migrationBuilder.Sql("DELETE FROM recipes.recipes;");
 
