@@ -1,4 +1,5 @@
 using System.Text;
+using Amazon.Lambda.AspNetCoreServer.Hosting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,7 +14,7 @@ using Users.Infrastructure.Persistence.Repositories;
 using Users.Infrastructure.Security;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
