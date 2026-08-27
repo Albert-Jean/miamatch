@@ -671,6 +671,132 @@ body {
     opacity: 0.2;
   }
 }
+
+/* Rangée cliquable (fiche recette) */
+.mm-row.link {
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  width: 100%;
+}
+.mm-row.link:active {
+  transform: scale(0.99);
+}
+
+/* Choix des catégories du deck */
+.mm-chooser {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 12px;
+}
+.mm-chooser .big {
+  font-size: 56px;
+}
+.mm-chooser h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  margin: 0;
+}
+.mm-chooser p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 8px;
+  max-width: 300px;
+}
+.mm-cats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.mm-cat {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 9px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.mm-cat.on {
+  background: var(--enamel);
+  border-color: var(--enamel);
+  color: #fff;
+}
+.mm-chooser .mm-big-btn {
+  max-width: 260px;
+}
+
+/* Carte sans photo */
+.mm-card .top.ph {
+  background: radial-gradient(120% 100% at 50% 0%, rgba(242, 193, 78, 0.55), transparent 70%), var(--paper);
+}
+
+/* Fiche recette (bottom sheet) */
+/* Le composant matches vit dans .mm-body (ancêtre positionné trop petit) : la fiche s'ancre au viewport. */
+.mm-sheet-bg.recipe {
+  position: fixed;
+  justify-content: center;
+}
+.mm-recipe-sheet {
+  max-height: 88dvh;
+  max-width: 430px;
+}
+.mm-recipe-sheet .hero {
+  height: 140px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.mm-recipe-sheet .hero.ph {
+  background: radial-gradient(120% 100% at 50% 0%, rgba(242, 193, 78, 0.55), transparent 70%), #fff;
+  border: 1px solid var(--line);
+}
+.mm-recipe-sheet .hero .emoji {
+  font-size: 64px;
+}
+.mm-recipe-scroll {
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 4px;
+}
+.mm-recipe-scroll .ing {
+  margin: 8px 0 0;
+  padding: 0 0 0 18px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.mm-recipe-scroll .steps {
+  margin: 8px 0 4px;
+  padding: 0 0 0 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mm-recipe-scroll .steps li::marker {
+  font-weight: 700;
+  color: var(--enamel);
+}
+
 .mm-toast {
   position: fixed;
   bottom: 26px;
