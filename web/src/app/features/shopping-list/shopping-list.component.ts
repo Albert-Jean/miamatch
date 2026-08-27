@@ -32,7 +32,7 @@ export class ShoppingListComponent implements OnInit {
   }
 
   formatMeasures(item: ShoppingListItem): string {
-    return item.measures.map((m) => `${m.quantity} ${m.unit}`.trim()).join(' + ');
+    return item.measures.join(' + ');
   }
 
   toggle(ingredientName: string): void {

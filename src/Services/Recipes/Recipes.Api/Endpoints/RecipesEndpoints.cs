@@ -32,12 +32,13 @@ namespace Recipes.Api.Endpoints
                 var response = new RecipeDetailsResponse(
                     recipe.Id,
                     recipe.Name,
+                    recipe.ImageUrl,
                     recipe.Ingredients.Select(i => new RecipeIngredientResponse(i.name, i.measure)).ToList());
 
                 return Results.Ok(response);
             });
         }
     }
-    public sealed record RecipeDetailsResponse(Guid Id, string Name, IReadOnlyCollection<RecipeIngredientResponse> Ingredients);
+    public sealed record RecipeDetailsResponse(Guid Id, string Name, string ImageUrl, IReadOnlyCollection<RecipeIngredientResponse> Ingredients);
     public sealed record RecipeIngredientResponse(string Name, string Measure);
 }

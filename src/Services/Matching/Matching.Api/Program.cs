@@ -3,6 +3,7 @@ using Amazon.SimpleNotificationService;
 using Matching.Api.Endpoints;
 using Matching.Application.Abstractions;
 using Matching.Application.Swipes;
+using Matching.Infrastructure.Clients;
 using Matching.Infrastructure.Persistence;
 using Matching.Infrastructure.Persistence.Messaging;
 using Matching.Infrastructure.Persistence.Repositories;
@@ -28,6 +29,10 @@ builder.Services.AddDbContext<MatchingDbContext>(options => options.UseNpgsql(bu
 builder.Services.AddScoped<ISwipeRepository, SwipeRepository>();
 builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 builder.Services.AddScoped<RecordSwipeHandler>();
+builder.Services.AddHttpClient<IRecipeClient, RecipeClient>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["Services:RecipesApiBaseUrl"]!);
+});
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
