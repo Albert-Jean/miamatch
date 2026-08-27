@@ -1,0 +1,27 @@
+<div class="mm-sheet-bg" (click)="closed.emit()">
+  <div class="mm-sheet" (click)="$event.stopPropagation()">
+    <h3>Ton foyer</h3>
+
+    @if (auth.selectedHousehold(); as household) {
+      <div class="sub">Code d'invitation — partage-le avec ta moitié</div>
+      <div class="mm-code" (click)="copyInviteCode(household.inviteCode)">{{ household.inviteCode }}</div>
+    }
+
+    @if (auth.households().length > 1) {
+      <div class="sub">Changer de foyer</div>
+      @for (household of auth.households(); track household.householdId) {
+        <div class="mm-row" style="cursor: pointer" (click)="switchHousehold(household.householdId)">
+          <div class="tx"><b>{{ household.name }}</b></div>
+          @if (household.householdId === auth.selectedHouseholdId()) {
+            <span class="mm-tag match">Actif</span>
+          }
+        </div>
+      }
+    }
+
+    <button class="mm-big-btn" (click)="enablePush()" [disabled]="pushBusy()">
+      {{ pushBusy() ? '…' : '🔔 Activer les notifications' }}
+    </button>
+    <button class="mm-big-btn alt" (click)="logout()">Se déconnecter</button>
+  </div>
+</div>

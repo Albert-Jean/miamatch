@@ -11,11 +11,13 @@ namespace Users.Application.Tests.Households;
 public class JoinHouseholdHandlerTests
 {
     private readonly IHouseholdRepository _householdRepository = Substitute.For<IHouseholdRepository>();
+    private readonly IUserRepository _userRepository = Substitute.For<IUserRepository>();
+    private readonly IJwtTokenGenerator _jwtTokenGenerator = Substitute.For<IJwtTokenGenerator>();
     private readonly JoinHouseholdHandler _handler;
 
     public JoinHouseholdHandlerTests()
     {
-        _handler = new JoinHouseholdHandler(_householdRepository);
+        _handler = new JoinHouseholdHandler(_householdRepository, _userRepository, _jwtTokenGenerator);
     }
 
     [Fact]
@@ -23,13 +25,18 @@ public class JoinHouseholdHandlerTests
     {
         var household = Household.Create("Foyer Albert", Guid.NewGuid());
         var newUserId = Guid.NewGuid();
+        var newUser = User.Create("Marie", "marie@example.com", "hash");
         _householdRepository.GetByInviteCodeAsync(Arg.Is<InviteCode>(c => c.Value == household.InviteCode.Value))
             .Returns(Task.FromResult<Household?>(household));
+        _userRepository.GetByIdAsync(newUserId).Returns(Task.FromResult<User?>(newUser));
+        _householdRepository.GetHouseholdIdsForUserAsync(newUserId).Returns(Task.FromResult<IReadOnlyCollection<Guid>>([household.Id]));
+        _jwtTokenGenerator.GenerateToken(newUser, Arg.Any<IEnumerable<Guid>>()).Returns("fresh-token");
 
         var result = await _handler.ExecuteAsync(household.InviteCode.Value.ToLowerInvariant(), newUserId);
 
         result.HouseholdId.Should().Be(household.Id);
         result.MemberCount.Should().Be(2);
+        result.Token.Should().Be("fresh-token");
         household.Members.Should().Contain(m => m.UserId == newUserId);
         await _householdRepository.Received(1).UpdateAsync(household);
     }

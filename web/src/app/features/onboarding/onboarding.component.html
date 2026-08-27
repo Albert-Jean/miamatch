@@ -1,0 +1,80 @@
+@if (step() === 'auth') {
+  <div class="mm-ob">
+    <div class="big">🍽️</div>
+    <h1>Bienvenue</h1>
+    <p>Choisis des recettes en swipant. Quand toi et ta moitié aimez la même, ça matche.</p>
+
+    @if (authMode() === 'register') {
+      <input
+        class="mm-input"
+        type="text"
+        name="name"
+        placeholder="Ton prénom"
+        [(ngModel)]="name"
+      />
+    }
+    <input class="mm-input" type="email" name="email" placeholder="Email" [(ngModel)]="email" />
+    <input
+      class="mm-input"
+      type="password"
+      name="password"
+      placeholder="Mot de passe"
+      [(ngModel)]="password"
+      (keydown.enter)="submitAuth()"
+    />
+
+    @if (error()) {
+      <div class="mm-err">{{ error() }}</div>
+    }
+
+    <button class="mm-big-btn" (click)="submitAuth()" [disabled]="busy()">
+      {{ busy() ? '…' : authMode() === 'login' ? 'Se connecter' : 'Commencer' }}
+    </button>
+    <button class="mm-link" (click)="authMode.set(authMode() === 'login' ? 'register' : 'login')">
+      {{ authMode() === 'login' ? "Pas de compte ? Créer un compte" : "Déjà un compte ? Se connecter" }}
+    </button>
+  </div>
+} @else if (householdMode() === 'created') {
+  <div class="mm-ob">
+    <div class="big">🎉</div>
+    <h1>Foyer créé</h1>
+    <p>Envoie ce code à ta moitié pour qu'elle rejoigne le foyer. Vous swiperez chacun de votre côté.</p>
+    <div class="mm-code" (click)="copyInviteCode()">{{ createdInviteCode }}</div>
+    <button class="mm-big-btn" (click)="finishOnboarding()">Commencer à swiper</button>
+  </div>
+} @else if (householdMode() === 'join') {
+  <div class="mm-ob">
+    <button class="mm-back" (click)="householdMode.set('choose')">← Retour</button>
+    <div class="big">🔑</div>
+    <h1>Rejoindre un foyer</h1>
+    <p>Saisis le code que ta moitié t'a envoyé.</p>
+    <input
+      class="mm-input"
+      type="text"
+      name="joinCode"
+      placeholder="Code (ex: A1B2C3)"
+      [(ngModel)]="joinCode"
+      (keydown.enter)="joinHousehold()"
+    />
+    @if (error()) {
+      <div class="mm-err">{{ error() }}</div>
+    }
+    <button class="mm-big-btn" (click)="joinHousehold()" [disabled]="busy() || !joinCode.trim()">
+      {{ busy() ? '…' : 'Rejoindre' }}
+    </button>
+  </div>
+} @else {
+  <div class="mm-ob">
+    <div class="big">🏡</div>
+    <h1>Votre foyer</h1>
+    <p>Crée un foyer et invite ta moitié, ou rejoins le sien avec un code.</p>
+    @if (error()) {
+      <div class="mm-err">{{ error() }}</div>
+    }
+    <button class="mm-big-btn" (click)="createHousehold()" [disabled]="busy()">
+      {{ busy() ? '…' : 'Créer un foyer' }}
+    </button>
+    <div class="mm-or">— ou —</div>
+    <button class="mm-big-btn alt" (click)="householdMode.set('join')">Rejoindre avec un code</button>
+  </div>
+}

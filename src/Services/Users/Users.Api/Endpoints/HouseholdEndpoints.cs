@@ -13,7 +13,7 @@ namespace Users.Api.Endpoints
             {
                 var creatorUserId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
                 var result = await handler.ExecuteAsync(request.Name, creatorUserId);
-                return Results.Created($"/households/{result.HouseholdID}", result);
+                return Results.Created($"/households/{result.HouseholdId}", result);
             }).RequireAuthorization();
             app.MapPost("/households/join", async (JoinHouseholdRequest request, ClaimsPrincipal user, JoinHouseholdHandler handler) =>
             {
@@ -32,6 +32,22 @@ namespace Users.Api.Endpoints
                 var memberIds = household.Members.Select(m => m.UserId).ToList();
                 return Results.Ok(memberIds);
             });
+            app.MapGet("/households/{id}", async (Guid id, IHouseholdRepository householdRepository) =>
+            {
+                var household = await householdRepository.GetByIdAsync(id);
+                if (household is null)
+                {
+                    return Results.NotFound();
+                }
+
+                return Results.Ok(new
+                {
+                    HouseholdId = household.Id,
+                    household.Name,
+                    InviteCode = household.InviteCode.Value,
+                    MemberCount = household.Members.Count
+                });
+            }).RequireAuthorization();
         }
     }
     public sealed record CreateHouseholdRequest(string Name);

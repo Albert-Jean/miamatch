@@ -13,23 +13,33 @@ namespace Users.Application.Households
     {
 
         private readonly IHouseholdRepository _householdRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
         public CreateHouseholdHandler(
-
-            IHouseholdRepository householdRepository)
+            IHouseholdRepository householdRepository,
+            IUserRepository userRepository,
+            IJwtTokenGenerator jwtTokenGenerator)
         {
             _householdRepository = householdRepository;
+            _userRepository = userRepository;
+            _jwtTokenGenerator = jwtTokenGenerator;
         }
-        public async Task<CreatehouseholdResult> ExecuteAsync(string name, Guid creatorUserId)
+        public async Task<CreateHouseholdResult> ExecuteAsync(string name, Guid creatorUserId)
         {
-            
+
             Household household = Household.Create(name, creatorUserId);
-            Guid householdId = household.Id;
-            string inviteCode = household.InviteCode.Value;
             await _householdRepository.AddAsync(household);
 
-            return new CreatehouseholdResult(householdId,inviteCode);
+            // The creator's existing JWT was issued before this household existed, so it
+            // carries no "householdId" claim for it — reissue a token with the updated set,
+            // same as LoginHandler does, or every other service would reject calls for it.
+            var user = await _userRepository.GetByIdAsync(creatorUserId);
+            var householdIds = await _householdRepository.GetHouseholdIdsForUserAsync(creatorUserId);
+            string token = _jwtTokenGenerator.GenerateToken(user!, householdIds);
+
+            return new CreateHouseholdResult(household.Id, household.Name, household.InviteCode.Value, household.Members.Count, token);
         }
-    }    
-    public sealed record CreatehouseholdResult(Guid HouseholdID, string InviteCode);
+    }
+    public sealed record CreateHouseholdResult(Guid HouseholdId, string Name, string InviteCode, int MemberCount, string Token);
 }
