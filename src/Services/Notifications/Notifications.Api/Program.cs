@@ -9,11 +9,14 @@ using Notifications.Application.Notifications;
 using Notifications.Application.PushSubscriptions;
 using Notifications.Infrastructure.Client;
 using Notifications.Infrastructure.Clients;
+using Notifications.Infrastructure.Configuration;
 using Notifications.Infrastructure.Persistence;
 using Notifications.Infrastructure.Repositories;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+// Must stay ahead of anything that reads configuration: it overrides appsettings and environment variables.
+builder.Configuration.AddMiamMatchSecrets();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 builder.Services.AddOpenApi();
 

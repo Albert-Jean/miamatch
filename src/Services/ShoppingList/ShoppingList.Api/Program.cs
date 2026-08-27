@@ -8,10 +8,13 @@ using ShoppingList.Api.Endpoints;
 using ShoppingList.Application.Abstractions;
 using ShoppingList.Application.ShoppingListItems;
 using ShoppingList.Infrastructure;
+using ShoppingList.Infrastructure.Configuration;
 using ShoppingList.Infrastructure.Persistence;
 using ShoppingList.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+// Must stay ahead of anything that reads configuration: it overrides appsettings and environment variables.
+builder.Configuration.AddMiamMatchSecrets();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

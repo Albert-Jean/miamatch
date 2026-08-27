@@ -4,6 +4,7 @@ using Matching.Api.Endpoints;
 using Matching.Application.Abstractions;
 using Matching.Application.Swipes;
 using Matching.Infrastructure.Clients;
+using Matching.Infrastructure.Configuration;
 using Matching.Infrastructure.Persistence;
 using Matching.Infrastructure.Persistence.Messaging;
 using Matching.Infrastructure.Persistence.Repositories;
@@ -13,6 +14,8 @@ using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+// Must stay ahead of anything that reads configuration: it overrides appsettings and environment variables.
+builder.Configuration.AddMiamMatchSecrets();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

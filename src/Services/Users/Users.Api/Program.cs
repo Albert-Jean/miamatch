@@ -10,10 +10,13 @@ using Users.Application.Abstractions;
 using Users.Application.Households;
 using Users.Application.Users;
 using Users.Infrastructure;
+using Users.Infrastructure.Configuration;
 using Users.Infrastructure.Persistence.Repositories;
 using Users.Infrastructure.Security;
 
 var builder = WebApplication.CreateBuilder(args);
+// Must stay ahead of anything that reads configuration: it overrides appsettings and environment variables.
+builder.Configuration.AddMiamMatchSecrets();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
