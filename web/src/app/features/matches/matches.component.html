@@ -1,0 +1,18 @@
+<div class="mm-list">
+  @if (matchesStore.matches().length === 0) {
+    <div class="mm-empty">
+      <div class="big">🍳</div>
+      <h3>Pas encore de match</h3>
+      <p>Swipe des recettes. Une recette rejoint vos matchs quand tous les membres du foyer l'aiment.</p>
+    </div>
+  } @else {
+    <div class="mm-section-h">Vos matchs</div>
+    @for (match of matchesStore.matches(); track match.recipeId) {
+      <div class="mm-row">
+        <div class="ic" [style.background-image]="'url(' + match.imageUrl + ')'"></div>
+        <div class="tx"><b>{{ match.name }}</b></div>
+        <span class="mm-tag match">Match</span>
+      </div>
+    }
+  }
+</div>

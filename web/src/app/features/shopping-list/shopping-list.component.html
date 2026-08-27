@@ -1,0 +1,29 @@
+@if (items().length === 0) {
+  <div class="mm-empty">
+    <div class="big">🛒</div>
+    <h3>Liste vide</h3>
+    <p>Ta liste se remplit dès que des recettes sont matchées avec ta moitié.</p>
+  </div>
+} @else {
+  <div class="mm-list">
+    @for (item of items(); track item.ingredientName) {
+      <div class="mm-item" [class.on]="checked().has(item.ingredientName)" (click)="toggle(item.ingredientName)">
+        <div class="mm-check" [class.on]="checked().has(item.ingredientName)">
+          {{ checked().has(item.ingredientName) ? '✓' : '' }}
+        </div>
+        <span class="nm">{{ item.ingredientName }}</span>
+        <span class="q">{{ formatMeasures(item) }}</span>
+      </div>
+    }
+
+    <div class="mm-cta">
+      <button class="primary" (click)="copyList()">Copier la liste</button>
+      <button class="ghost" (click)="showText.set(!showText())">{{ showText() ? 'Masquer' : 'Aperçu texte' }}</button>
+    </div>
+    @if (showText()) {
+      <div class="mm-export">
+        <textarea readonly [value]="buildText()"></textarea>
+      </div>
+    }
+  </div>
+}

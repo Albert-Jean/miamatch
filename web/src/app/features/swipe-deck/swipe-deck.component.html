@@ -1,0 +1,61 @@
+<div class="mm-stage">
+  @if (loading()) {
+    <div class="mm-spin">Chargement du deck…</div>
+  } @else if (done()) {
+    <div class="mm-empty">
+      <div class="big">🎉</div>
+      <h3>Deck terminé</h3>
+      <p>Tu as passé toutes les recettes de la semaine. Va jeter un œil à tes matchs !</p>
+    </div>
+  } @else {
+    @for (recipe of visibleStack(); track recipe.id; let i = $index; let isTop = $last) {
+      <div
+        class="mm-card"
+        [style.transform]="topTransform(isTop, visibleStack().length - 1 - i)"
+        [style.transition]="isTop && (exit() || !drag().active) ? 'transform .28s ease' : 'none'"
+        [style.z-index]="10 + i"
+        (pointerdown)="isTop && onPointerDown($event)"
+        (pointermove)="isTop && onPointerMove($event)"
+        (pointerup)="isTop && onPointerUp()"
+        (pointercancel)="isTop && onPointerUp()"
+      >
+        <div class="top" [style.background-image]="'url(' + recipe.imageUrl + ')'">
+          @if (isTop) {
+            <div class="mm-stamp like" [style.opacity]="likeOpacity()">Oui</div>
+            <div class="mm-stamp pass" [style.opacity]="passOpacity()">Non</div>
+          }
+        </div>
+        <div class="foot">
+          <h2>{{ recipe.name }}</h2>
+        </div>
+      </div>
+    }
+  }
+</div>
+
+@if (!loading() && !done()) {
+  <div class="mm-actions">
+    <button class="mm-btn undo" (click)="undo()" [disabled]="!history().length" title="Annuler">↩</button>
+    <button class="mm-btn pass" (click)="commit('pass')" title="Passer">✕</button>
+    <button class="mm-btn like" (click)="commit('like')" title="J'aime">♥</button>
+  </div>
+}
+
+@if (matchModal(); as recipe) {
+  <div class="mm-ov">
+    @for (i of confetti; track i) {
+      <span
+        class="mm-confetti"
+        [style.left.%]="(i * 7) % 100"
+        [style.animation-duration.s]="1.6 + (i % 5) * 0.4"
+        [style.animation-delay.s]="(i % 6) * 0.1"
+        >{{ ['🎉', '💛', '🍽️', '✨'][i % 4] }}</span
+      >
+    }
+    <div class="kicker">Ça matche</div>
+    <h2>Miam !</h2>
+    <div class="em"><img [src]="recipe.imageUrl" [alt]="recipe.name" /></div>
+    <div class="who"><b>{{ recipe.name }}</b><br />Vous l'avez aimée tous les deux</div>
+    <button (click)="matchModal.set(null)">Continuer à swiper</button>
+  </div>
+}

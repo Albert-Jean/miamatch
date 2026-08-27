@@ -1,0 +1,23 @@
+<div class="mm-root">
+  <div class="mm-phone">
+    <div class="mm-head">
+      <div class="mm-brand">Miam<span>m</span>atch</div>
+      @if (showHouseholdButton()) {
+        <button class="mm-household" (click)="sheetOpen.set(true)" title="Foyer">
+          <div class="mm-ava you">{{ initials() }}</div>
+          <div class="mm-ava her">+</div>
+        </button>
+      }
+    </div>
+
+    <router-outlet />
+
+    @if (sheetOpen()) {
+      <app-household-sheet (closed)="sheetOpen.set(false)" />
+    }
+
+    @if (toast.message(); as message) {
+      <div class="mm-toast">{{ message }}</div>
+    }
+  </div>
+</div>

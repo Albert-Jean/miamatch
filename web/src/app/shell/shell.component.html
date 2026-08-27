@@ -1,0 +1,14 @@
+<div class="mm-tabs">
+  <a class="mm-tab" routerLink="swipe" routerLinkActive="active">🍽️ Recettes</a>
+  <a class="mm-tab" routerLink="matches" routerLinkActive="active">
+    💛 Matchs
+    @if (matchCount() > 0) {
+      <span class="badge">{{ matchCount() }}</span>
+    }
+  </a>
+  <a class="mm-tab" routerLink="shopping-list" routerLinkActive="active">🛒 Liste</a>
+</div>
+
+<div class="mm-body">
+  <router-outlet />
+</div>
