@@ -1,0 +1,2198 @@
+[
+  {
+    "externalId": "boeuf-bourguignon",
+    "name": "Bœuf bourguignon",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/vtqxtu1511784197.jpg",
+    "imageSearch": "Beef Bourguignon",
+    "tags": [
+      "comfort",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Bœuf à braiser (paleron)",
+        "measure": "800 g"
+      },
+      {
+        "name": "Lardons fumés",
+        "measure": "150 g"
+      },
+      {
+        "name": "Carottes",
+        "measure": "3"
+      },
+      {
+        "name": "Oignons",
+        "measure": "2"
+      },
+      {
+        "name": "Champignons de Paris",
+        "measure": "250 g"
+      },
+      {
+        "name": "Vin rouge corsé",
+        "measure": "50 cl"
+      },
+      {
+        "name": "Bouillon de bœuf",
+        "measure": "25 cl"
+      },
+      {
+        "name": "Farine",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Bouquet garni",
+        "measure": "1"
+      }
+    ],
+    "steps": [
+      "Coupez le bœuf en cubes de 4 cm et faites-les dorer dans une cocotte avec un filet d'huile, en plusieurs fois. Réservez.",
+      "Faites revenir les lardons, les oignons émincés et les carottes en rondelles 5 minutes dans la même cocotte.",
+      "Remettez la viande, saupoudrez de farine et mélangez 2 minutes sur feu vif.",
+      "Versez le vin rouge et le bouillon, ajoutez le bouquet garni, salez et poivrez.",
+      "Couvrez et laissez mijoter à feu doux 2 h 30, en ajoutant les champignons émincés à mi-cuisson.",
+      "Servez bien chaud avec des pommes de terre vapeur ou des tagliatelles."
+    ]
+  },
+  {
+    "externalId": "blanquette-de-veau",
+    "name": "Blanquette de veau",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Blanquette_de_veau_%C3%A0_l%27ancienne_04.jpg/960px-Blanquette_de_veau_%C3%A0_l%27ancienne_04.jpg",
+    "imageSearch": "Blanquette de veau",
+    "tags": [
+      "comfort",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Épaule de veau",
+        "measure": "800 g"
+      },
+      {
+        "name": "Carottes",
+        "measure": "3"
+      },
+      {
+        "name": "Poireau",
+        "measure": "1"
+      },
+      {
+        "name": "Oignon piqué de clous de girofle",
+        "measure": "1"
+      },
+      {
+        "name": "Champignons de Paris",
+        "measure": "200 g"
+      },
+      {
+        "name": "Crème fraîche épaisse",
+        "measure": "20 cl"
+      },
+      {
+        "name": "Beurre",
+        "measure": "40 g"
+      },
+      {
+        "name": "Farine",
+        "measure": "40 g"
+      },
+      {
+        "name": "Jaune d'œuf",
+        "measure": "1"
+      }
+    ],
+    "steps": [
+      "Mettez le veau en morceaux dans une cocotte, couvrez d'eau froide et portez à ébullition en écumant.",
+      "Ajoutez les carottes, le poireau et l'oignon, salez et laissez frémir 1 h 30 à couvert.",
+      "Faites un roux avec le beurre et la farine, puis délayez avec deux louches de bouillon filtré.",
+      "Ajoutez les champignons émincés dans la sauce et laissez épaissir 10 minutes à feu doux.",
+      "Hors du feu, incorporez la crème mélangée au jaune d'œuf, puis nappez la viande égouttée.",
+      "Servez avec du riz blanc et un tour de moulin à poivre."
+    ]
+  },
+  {
+    "externalId": "poulet-basquaise",
+    "name": "Poulet basquaise",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/wruvqv1511880994.jpg",
+    "imageSearch": "Basque chicken",
+    "tags": [
+      "proteine",
+      "healthy"
+    ],
+    "ingredients": [
+      {
+        "name": "Cuisses de poulet",
+        "measure": "4"
+      },
+      {
+        "name": "Poivrons rouges et verts",
+        "measure": "3"
+      },
+      {
+        "name": "Tomates",
+        "measure": "4"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Ail",
+        "measure": "3 gousses"
+      },
+      {
+        "name": "Piment d'Espelette",
+        "measure": "1 c. à café"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Faites dorer les cuisses de poulet salées et poivrées dans l'huile d'olive, puis réservez.",
+      "Faites revenir l'oignon émincé, l'ail et les poivrons en lanières 10 minutes.",
+      "Ajoutez les tomates concassées et le piment d'Espelette, puis remettez le poulet.",
+      "Couvrez et laissez mijoter 35 minutes à feu doux en retournant le poulet à mi-cuisson.",
+      "Servez avec du riz et parsemez d'un peu de piment d'Espelette."
+    ]
+  },
+  {
+    "externalId": "poulet-roti-legumes",
+    "name": "Poulet rôti et légumes du four",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/nlxald1764112200.jpg",
+    "imageSearch": "Roast chicken",
+    "tags": [
+      "proteine",
+      "healthy",
+      "comfort"
+    ],
+    "ingredients": [
+      {
+        "name": "Poulet fermier",
+        "measure": "1 (1,5 kg)"
+      },
+      {
+        "name": "Pommes de terre",
+        "measure": "600 g"
+      },
+      {
+        "name": "Carottes",
+        "measure": "4"
+      },
+      {
+        "name": "Oignons rouges",
+        "measure": "2"
+      },
+      {
+        "name": "Thym et romarin",
+        "measure": "3 branches"
+      },
+      {
+        "name": "Ail",
+        "measure": "1 tête"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "3 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Préchauffez le four à 200 °C. Salez et poivrez le poulet, glissez le thym et la moitié de l'ail dans le ventre.",
+      "Disposez les légumes coupés en gros morceaux dans un plat, arrosez d'huile d'olive et mélangez.",
+      "Posez le poulet sur les légumes et enfournez 1 h 15 en l'arrosant de jus toutes les 20 minutes.",
+      "Laissez reposer le poulet 10 minutes sous une feuille d'aluminium avant de découper.",
+      "Servez avec les légumes rôtis et le jus du plat."
+    ]
+  },
+  {
+    "externalId": "hachis-parmentier",
+    "name": "Hachis parmentier",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/w8umt11583268117.jpg",
+    "imageSearch": "Cottage pie",
+    "tags": [
+      "comfort",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Bœuf haché",
+        "measure": "500 g"
+      },
+      {
+        "name": "Pommes de terre",
+        "measure": "1 kg"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Ail",
+        "measure": "2 gousses"
+      },
+      {
+        "name": "Lait",
+        "measure": "20 cl"
+      },
+      {
+        "name": "Beurre",
+        "measure": "50 g"
+      },
+      {
+        "name": "Fromage râpé",
+        "measure": "80 g"
+      },
+      {
+        "name": "Persil",
+        "measure": "1 bouquet"
+      }
+    ],
+    "steps": [
+      "Faites cuire les pommes de terre 20 minutes à l'eau bouillante salée, puis écrasez-les avec le lait et le beurre.",
+      "Faites revenir l'oignon et l'ail hachés, ajoutez le bœuf haché et le persil, salez et poivrez, cuisez 8 minutes.",
+      "Étalez la viande dans un plat à gratin, recouvrez de purée et parsemez de fromage râpé.",
+      "Enfournez 25 minutes à 190 °C jusqu'à ce que le dessus soit doré.",
+      "Servez avec une salade verte."
+    ]
+  },
+  {
+    "externalId": "lasagnes-bolognaise",
+    "name": "Lasagnes à la bolognaise",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg",
+    "imageSearch": "Lasagne",
+    "tags": [
+      "comfort",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Feuilles de lasagne",
+        "measure": "12"
+      },
+      {
+        "name": "Bœuf haché",
+        "measure": "500 g"
+      },
+      {
+        "name": "Coulis de tomate",
+        "measure": "700 g"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Carotte",
+        "measure": "1"
+      },
+      {
+        "name": "Lait",
+        "measure": "50 cl"
+      },
+      {
+        "name": "Beurre",
+        "measure": "40 g"
+      },
+      {
+        "name": "Farine",
+        "measure": "40 g"
+      },
+      {
+        "name": "Parmesan râpé",
+        "measure": "80 g"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon et la carotte hachés, ajoutez la viande puis le coulis de tomate et laissez mijoter 30 minutes.",
+      "Préparez la béchamel : faites fondre le beurre, ajoutez la farine, puis le lait en fouettant jusqu'à épaississement.",
+      "Montez les lasagnes en alternant bolognaise, feuilles de pâte et béchamel, terminez par la béchamel et le parmesan.",
+      "Enfournez 35 minutes à 180 °C jusqu'à ce que le dessus soit bien gratiné.",
+      "Laissez reposer 10 minutes avant de découper et de servir."
+    ]
+  },
+  {
+    "externalId": "chili-con-carne",
+    "name": "Chili con carne",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/wqurxy1511453156.jpg",
+    "imageSearch": "Chili con carne",
+    "tags": [
+      "proteine",
+      "comfort"
+    ],
+    "ingredients": [
+      {
+        "name": "Bœuf haché",
+        "measure": "500 g"
+      },
+      {
+        "name": "Haricots rouges cuits",
+        "measure": "400 g"
+      },
+      {
+        "name": "Tomates concassées",
+        "measure": "400 g"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Poivron rouge",
+        "measure": "1"
+      },
+      {
+        "name": "Ail",
+        "measure": "2 gousses"
+      },
+      {
+        "name": "Cumin et paprika",
+        "measure": "1 c. à café de chaque"
+      },
+      {
+        "name": "Piment en poudre",
+        "measure": "1/2 c. à café"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon, l'ail et le poivron émincés 5 minutes dans un filet d'huile.",
+      "Ajoutez le bœuf haché et faites-le colorer en l'émiettant.",
+      "Incorporez les épices, les tomates concassées et un verre d'eau, puis laissez mijoter 20 minutes.",
+      "Ajoutez les haricots rouges égouttés et poursuivez la cuisson 10 minutes.",
+      "Servez avec du riz, un peu de coriandre et une cuillère de crème si vous aimez."
+    ]
+  },
+  {
+    "externalId": "tartiflette",
+    "name": "Tartiflette",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/qwrtut1468418027.jpg",
+    "imageSearch": "Tartiflette",
+    "tags": [
+      "comfort"
+    ],
+    "ingredients": [
+      {
+        "name": "Pommes de terre",
+        "measure": "1 kg"
+      },
+      {
+        "name": "Reblochon",
+        "measure": "1"
+      },
+      {
+        "name": "Lardons fumés",
+        "measure": "200 g"
+      },
+      {
+        "name": "Oignons",
+        "measure": "2"
+      },
+      {
+        "name": "Vin blanc sec",
+        "measure": "10 cl"
+      },
+      {
+        "name": "Crème fraîche",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Faites cuire les pommes de terre 15 minutes à l'eau salée, puis coupez-les en rondelles épaisses.",
+      "Faites revenir les oignons émincés et les lardons, déglacez au vin blanc.",
+      "Mélangez pommes de terre, lardons-oignons et crème dans un plat à gratin.",
+      "Coupez le reblochon en deux dans l'épaisseur et posez-le croûte vers le haut sur le plat.",
+      "Enfournez 25 minutes à 200 °C jusqu'à ce que le fromage soit fondu et doré. Servez avec une salade."
+    ]
+  },
+  {
+    "externalId": "gratin-dauphinois",
+    "name": "Gratin dauphinois",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/ytttsv1511798734.jpg",
+    "imageSearch": "Gratin dauphinois",
+    "tags": [
+      "comfort",
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Pommes de terre à chair ferme",
+        "measure": "1,2 kg"
+      },
+      {
+        "name": "Crème entière liquide",
+        "measure": "40 cl"
+      },
+      {
+        "name": "Lait",
+        "measure": "25 cl"
+      },
+      {
+        "name": "Ail",
+        "measure": "2 gousses"
+      },
+      {
+        "name": "Noix de muscade",
+        "measure": "1 pincée"
+      },
+      {
+        "name": "Beurre",
+        "measure": "20 g"
+      }
+    ],
+    "steps": [
+      "Préchauffez le four à 160 °C et frottez un plat à gratin beurré avec une gousse d'ail.",
+      "Coupez les pommes de terre en fines rondelles sans les rincer.",
+      "Portez à frémissement le lait, la crème, l'ail haché, le sel, le poivre et la muscade.",
+      "Disposez les pommes de terre en couches dans le plat et versez le mélange chaud dessus.",
+      "Enfournez 1 h 30 jusqu'à ce que le gratin soit fondant à cœur et doré en surface."
+    ]
+  },
+  {
+    "externalId": "soupe-oignon-gratinee",
+    "name": "Soupe à l'oignon gratinée",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/xvrrux1511783685.jpg",
+    "imageSearch": "French Onion Soup",
+    "tags": [
+      "comfort",
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Oignons jaunes",
+        "measure": "6"
+      },
+      {
+        "name": "Beurre",
+        "measure": "50 g"
+      },
+      {
+        "name": "Farine",
+        "measure": "1 c. à soupe"
+      },
+      {
+        "name": "Bouillon de légumes",
+        "measure": "1,2 L"
+      },
+      {
+        "name": "Vin blanc sec",
+        "measure": "10 cl"
+      },
+      {
+        "name": "Pain de campagne",
+        "measure": "4 tranches"
+      },
+      {
+        "name": "Gruyère râpé",
+        "measure": "120 g"
+      }
+    ],
+    "steps": [
+      "Faites fondre les oignons émincés dans le beurre 25 minutes à feu doux jusqu'à une belle couleur dorée.",
+      "Saupoudrez de farine, mélangez, puis versez le vin blanc et le bouillon.",
+      "Laissez mijoter 20 minutes, salez et poivrez.",
+      "Répartissez la soupe dans des bols, posez une tranche de pain et couvrez de gruyère.",
+      "Passez 5 minutes sous le gril du four jusqu'à ce que le fromage gratine."
+    ]
+  },
+  {
+    "externalId": "quiche-lorraine",
+    "name": "Quiche lorraine",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/54._Quiche_lorraine.jpg/960px-54._Quiche_lorraine.jpg",
+    "imageSearch": "Quiche Lorraine",
+    "tags": [
+      "comfort"
+    ],
+    "ingredients": [
+      {
+        "name": "Pâte brisée",
+        "measure": "1"
+      },
+      {
+        "name": "Lardons fumés",
+        "measure": "200 g"
+      },
+      {
+        "name": "Œufs",
+        "measure": "3"
+      },
+      {
+        "name": "Crème fraîche",
+        "measure": "20 cl"
+      },
+      {
+        "name": "Lait",
+        "measure": "10 cl"
+      },
+      {
+        "name": "Noix de muscade",
+        "measure": "1 pincée"
+      }
+    ],
+    "steps": [
+      "Préchauffez le four à 180 °C et foncez un moule avec la pâte brisée. Piquez le fond.",
+      "Faites rissoler les lardons à sec et répartissez-les sur la pâte.",
+      "Battez les œufs avec la crème, le lait, la muscade, du sel et du poivre.",
+      "Versez l'appareil sur les lardons et enfournez 35 minutes.",
+      "Servez tiède avec une salade verte."
+    ]
+  },
+  {
+    "externalId": "croque-monsieur",
+    "name": "Croque-monsieur",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Sandwich-Mixto.jpg/960px-Sandwich-Mixto.jpg",
+    "imageSearch": "Croque Monsieur",
+    "tags": [
+      "rapide",
+      "comfort"
+    ],
+    "ingredients": [
+      {
+        "name": "Pain de mie",
+        "measure": "8 tranches"
+      },
+      {
+        "name": "Jambon blanc",
+        "measure": "4 tranches"
+      },
+      {
+        "name": "Emmental râpé",
+        "measure": "150 g"
+      },
+      {
+        "name": "Beurre",
+        "measure": "30 g"
+      },
+      {
+        "name": "Crème fraîche",
+        "measure": "3 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Beurrez légèrement les tranches de pain de mie sur une face.",
+      "Tartinez l'intérieur de crème, ajoutez le jambon et la moitié du fromage, refermez les croques.",
+      "Parsemez le dessus du reste de fromage râpé.",
+      "Enfournez 12 minutes à 200 °C jusqu'à ce que le fromage soit fondu et doré.",
+      "Servez chaud avec une salade."
+    ]
+  },
+  {
+    "externalId": "omelette-champignons",
+    "name": "Omelette aux champignons",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/hqaejl1695738653.jpg",
+    "imageSearch": "Omelette",
+    "tags": [
+      "rapide",
+      "vegetarien",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Œufs",
+        "measure": "8"
+      },
+      {
+        "name": "Champignons de Paris",
+        "measure": "250 g"
+      },
+      {
+        "name": "Échalote",
+        "measure": "1"
+      },
+      {
+        "name": "Persil haché",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Beurre",
+        "measure": "30 g"
+      }
+    ],
+    "steps": [
+      "Faites sauter les champignons émincés et l'échalote dans la moitié du beurre jusqu'à évaporation de l'eau.",
+      "Battez les œufs avec le persil, du sel et du poivre.",
+      "Versez les œufs sur les champignons avec le reste de beurre et cuisez à feu moyen en ramenant les bords vers le centre.",
+      "Pliez l'omelette encore baveuse et servez aussitôt avec une salade."
+    ]
+  },
+  {
+    "externalId": "salade-cesar-poulet",
+    "name": "Salade César au poulet",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Ceasar_salad_%286814864465%29.jpg/960px-Ceasar_salad_%286814864465%29.jpg",
+    "imageSearch": "Chicken Caesar salad",
+    "tags": [
+      "rapide",
+      "proteine",
+      "healthy"
+    ],
+    "ingredients": [
+      {
+        "name": "Blancs de poulet",
+        "measure": "2"
+      },
+      {
+        "name": "Salade romaine",
+        "measure": "1"
+      },
+      {
+        "name": "Pain de campagne",
+        "measure": "3 tranches"
+      },
+      {
+        "name": "Parmesan en copeaux",
+        "measure": "50 g"
+      },
+      {
+        "name": "Yaourt grec",
+        "measure": "3 c. à soupe"
+      },
+      {
+        "name": "Moutarde",
+        "measure": "1 c. à café"
+      },
+      {
+        "name": "Anchois (facultatif)",
+        "measure": "2 filets"
+      },
+      {
+        "name": "Citron",
+        "measure": "1/2"
+      }
+    ],
+    "steps": [
+      "Faites griller les blancs de poulet 6 minutes par face, puis tranchez-les.",
+      "Coupez le pain en dés et faites-le dorer au four ou à la poêle pour obtenir des croûtons.",
+      "Mixez le yaourt, la moutarde, le jus de citron et les anchois pour la sauce.",
+      "Mélangez la romaine avec la sauce, ajoutez poulet, croûtons et copeaux de parmesan.",
+      "Servez immédiatement, bien poivré."
+    ]
+  },
+  {
+    "externalId": "salade-chevre-chaud",
+    "name": "Salade de chèvre chaud",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Salade_de_ch%C3%A8vre_chaud_002.jpg/960px-Salade_de_ch%C3%A8vre_chaud_002.jpg",
+    "imageSearch": "Goat cheese salad",
+    "tags": [
+      "rapide",
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Crottins de chèvre",
+        "measure": "2"
+      },
+      {
+        "name": "Pain de campagne",
+        "measure": "4 tranches"
+      },
+      {
+        "name": "Mesclun",
+        "measure": "150 g"
+      },
+      {
+        "name": "Noix",
+        "measure": "50 g"
+      },
+      {
+        "name": "Miel",
+        "measure": "1 c. à soupe"
+      },
+      {
+        "name": "Vinaigre balsamique",
+        "measure": "1 c. à soupe"
+      },
+      {
+        "name": "Huile de noix",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Coupez les crottins en deux et posez chaque moitié sur une tranche de pain.",
+      "Déposez un filet de miel sur le fromage et passez 8 minutes sous le gril.",
+      "Préparez la vinaigrette avec l'huile de noix, le balsamique, sel et poivre.",
+      "Mélangez le mesclun et les noix avec la vinaigrette, posez les toasts chauds dessus et servez."
+    ]
+  },
+  {
+    "externalId": "ratatouille",
+    "name": "Ratatouille",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/wrpwuu1511786491.jpg",
+    "imageSearch": "Ratatouille",
+    "tags": [
+      "healthy",
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Aubergines",
+        "measure": "2"
+      },
+      {
+        "name": "Courgettes",
+        "measure": "2"
+      },
+      {
+        "name": "Poivrons",
+        "measure": "2"
+      },
+      {
+        "name": "Tomates",
+        "measure": "4"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Ail",
+        "measure": "3 gousses"
+      },
+      {
+        "name": "Herbes de Provence",
+        "measure": "1 c. à soupe"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "4 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Coupez tous les légumes en dés réguliers.",
+      "Faites revenir séparément aubergines, courgettes et poivrons dans l'huile d'olive, puis réservez.",
+      "Faites fondre l'oignon et l'ail, ajoutez les tomates et les herbes, laissez compoter 10 minutes.",
+      "Réunissez tous les légumes dans la cocotte et laissez mijoter 30 minutes à feu doux.",
+      "Rectifiez l'assaisonnement et servez chaud ou tiède, seul ou avec du riz."
+    ]
+  },
+  {
+    "externalId": "chakchouka",
+    "name": "Chakchouka aux œufs",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/g373701551450225.jpg",
+    "imageSearch": "Shakshuka",
+    "tags": [
+      "healthy",
+      "vegetarien",
+      "rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Œufs",
+        "measure": "4"
+      },
+      {
+        "name": "Tomates concassées",
+        "measure": "400 g"
+      },
+      {
+        "name": "Poivrons",
+        "measure": "2"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Ail",
+        "measure": "2 gousses"
+      },
+      {
+        "name": "Cumin et paprika",
+        "measure": "1 c. à café de chaque"
+      },
+      {
+        "name": "Coriandre fraîche",
+        "measure": "quelques brins"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon et les poivrons émincés 8 minutes dans un filet d'huile d'olive.",
+      "Ajoutez l'ail, les épices et les tomates concassées, laissez réduire 10 minutes.",
+      "Creusez 4 puits dans la sauce et cassez-y les œufs.",
+      "Couvrez et laissez cuire 5 minutes, le blanc doit être pris et le jaune coulant.",
+      "Parsemez de coriandre et servez avec du pain."
+    ]
+  },
+  {
+    "externalId": "dahl-lentilles-corail",
+    "name": "Dahl de lentilles corail",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/wuxrtu1483564410.jpg",
+    "imageSearch": "Dal",
+    "tags": [
+      "healthy",
+      "vegetarien",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Lentilles corail",
+        "measure": "300 g"
+      },
+      {
+        "name": "Lait de coco",
+        "measure": "40 cl"
+      },
+      {
+        "name": "Tomates concassées",
+        "measure": "200 g"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Gingembre frais",
+        "measure": "2 cm"
+      },
+      {
+        "name": "Curry en poudre",
+        "measure": "1 c. à soupe"
+      },
+      {
+        "name": "Curcuma",
+        "measure": "1 c. à café"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon émincé et le gingembre râpé avec les épices 3 minutes.",
+      "Ajoutez les lentilles rincées, les tomates, le lait de coco et 30 cl d'eau.",
+      "Laissez mijoter 20 minutes à feu doux en remuant, jusqu'à ce que les lentilles soient fondantes.",
+      "Salez, ajoutez un filet de jus de citron.",
+      "Servez avec du riz basmati et de la coriandre."
+    ]
+  },
+  {
+    "externalId": "curry-pois-chiches",
+    "name": "Curry de pois chiches aux épinards",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Chana_masala.jpg/960px-Chana_masala.jpg",
+    "imageSearch": "Chickpea curry",
+    "tags": [
+      "healthy",
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Pois chiches cuits",
+        "measure": "400 g"
+      },
+      {
+        "name": "Épinards frais",
+        "measure": "200 g"
+      },
+      {
+        "name": "Lait de coco",
+        "measure": "40 cl"
+      },
+      {
+        "name": "Tomates concassées",
+        "measure": "200 g"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Ail",
+        "measure": "2 gousses"
+      },
+      {
+        "name": "Garam masala",
+        "measure": "1 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon et l'ail émincés avec le garam masala 3 minutes.",
+      "Ajoutez les tomates et le lait de coco, laissez frémir 5 minutes.",
+      "Incorporez les pois chiches égouttés et laissez mijoter 15 minutes.",
+      "Ajoutez les épinards et laissez-les tomber 2 minutes dans la sauce.",
+      "Servez avec du riz ou des naans."
+    ]
+  },
+  {
+    "externalId": "risotto-champignons",
+    "name": "Risotto aux champignons",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Flickr_-_cyclonebill_-_Risotto_med_citron_og_gr%C3%B8nne_b%C3%B8nner.jpg/960px-Flickr_-_cyclonebill_-_Risotto_med_citron_og_gr%C3%B8nne_b%C3%B8nner.jpg",
+    "imageSearch": "Mushroom risotto",
+    "tags": [
+      "comfort",
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Riz arborio",
+        "measure": "300 g"
+      },
+      {
+        "name": "Champignons de Paris et cèpes",
+        "measure": "400 g"
+      },
+      {
+        "name": "Bouillon de légumes",
+        "measure": "1 L"
+      },
+      {
+        "name": "Vin blanc sec",
+        "measure": "10 cl"
+      },
+      {
+        "name": "Échalotes",
+        "measure": "2"
+      },
+      {
+        "name": "Parmesan râpé",
+        "measure": "80 g"
+      },
+      {
+        "name": "Beurre",
+        "measure": "40 g"
+      }
+    ],
+    "steps": [
+      "Faites sauter les champignons émincés dans la moitié du beurre, réservez.",
+      "Faites fondre les échalotes hachées, ajoutez le riz et nacrez-le 2 minutes.",
+      "Déglacez au vin blanc, puis ajoutez le bouillon chaud louche par louche en remuant, pendant 18 minutes.",
+      "Incorporez les champignons, le parmesan et le reste de beurre hors du feu.",
+      "Couvrez 2 minutes, poivrez et servez aussitôt."
+    ]
+  },
+  {
+    "externalId": "pates-pesto",
+    "name": "Pâtes au pesto maison",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/BasilPesto.JPG/960px-BasilPesto.JPG",
+    "imageSearch": "Pesto pasta",
+    "tags": [
+      "rapide",
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Linguine",
+        "measure": "400 g"
+      },
+      {
+        "name": "Basilic frais",
+        "measure": "2 bouquets"
+      },
+      {
+        "name": "Pignons de pin",
+        "measure": "40 g"
+      },
+      {
+        "name": "Parmesan râpé",
+        "measure": "60 g"
+      },
+      {
+        "name": "Ail",
+        "measure": "1 gousse"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "10 cl"
+      }
+    ],
+    "steps": [
+      "Mixez le basilic, les pignons, le parmesan, l'ail et l'huile d'olive en pesto. Salez légèrement.",
+      "Faites cuire les pâtes al dente dans un grand volume d'eau salée.",
+      "Réservez une louche d'eau de cuisson, égouttez les pâtes.",
+      "Mélangez les pâtes avec le pesto en détendant avec un peu d'eau de cuisson.",
+      "Servez avec des copeaux de parmesan et du poivre du moulin."
+    ]
+  },
+  {
+    "externalId": "pates-carbonara",
+    "name": "Pâtes à la carbonara",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg",
+    "imageSearch": "Spaghetti alla Carbonara",
+    "tags": [
+      "rapide",
+      "comfort"
+    ],
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "measure": "400 g"
+      },
+      {
+        "name": "Lardons ou pancetta",
+        "measure": "200 g"
+      },
+      {
+        "name": "Jaunes d'œufs",
+        "measure": "4"
+      },
+      {
+        "name": "Parmesan ou pecorino râpé",
+        "measure": "80 g"
+      },
+      {
+        "name": "Poivre noir",
+        "measure": "généreusement"
+      }
+    ],
+    "steps": [
+      "Faites cuire les spaghetti al dente dans une eau bien salée.",
+      "Faites dorer les lardons à sec dans une poêle.",
+      "Mélangez les jaunes d'œufs avec le fromage râpé et beaucoup de poivre.",
+      "Égouttez les pâtes en gardant une louche d'eau, versez-les dans la poêle hors du feu.",
+      "Ajoutez le mélange œufs-fromage et un peu d'eau de cuisson, remuez vivement pour napper sans cuire les œufs. Servez aussitôt."
+    ]
+  },
+  {
+    "externalId": "spaghetti-bolognaise",
+    "name": "Spaghetti à la bolognaise",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/sutysw1468247559.jpg",
+    "imageSearch": "Spaghetti Bolognese",
+    "tags": [
+      "comfort",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "measure": "400 g"
+      },
+      {
+        "name": "Bœuf haché",
+        "measure": "400 g"
+      },
+      {
+        "name": "Coulis de tomate",
+        "measure": "500 g"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Carotte",
+        "measure": "1"
+      },
+      {
+        "name": "Céleri",
+        "measure": "1 branche"
+      },
+      {
+        "name": "Vin rouge",
+        "measure": "10 cl"
+      },
+      {
+        "name": "Parmesan râpé",
+        "measure": "60 g"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon, la carotte et le céleri finement hachés 5 minutes.",
+      "Ajoutez la viande hachée et faites-la colorer, puis déglacez au vin rouge.",
+      "Versez le coulis de tomate, salez, poivrez et laissez mijoter 45 minutes à feu doux.",
+      "Faites cuire les spaghetti al dente et égouttez-les.",
+      "Servez les pâtes nappées de sauce avec le parmesan."
+    ]
+  },
+  {
+    "externalId": "buddha-bowl",
+    "name": "Buddha bowl quinoa et légumes",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/BuddhaBowlLot.jpg/960px-BuddhaBowlLot.jpg",
+    "imageSearch": "Buddha bowl",
+    "tags": [
+      "healthy",
+      "vegetarien",
+      "rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Quinoa",
+        "measure": "200 g"
+      },
+      {
+        "name": "Pois chiches cuits",
+        "measure": "200 g"
+      },
+      {
+        "name": "Avocat",
+        "measure": "1"
+      },
+      {
+        "name": "Carottes",
+        "measure": "2"
+      },
+      {
+        "name": "Chou rouge",
+        "measure": "1/4"
+      },
+      {
+        "name": "Graines de sésame",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Sauce tahini",
+        "measure": "3 c. à soupe"
+      },
+      {
+        "name": "Citron",
+        "measure": "1/2"
+      }
+    ],
+    "steps": [
+      "Faites cuire le quinoa selon les indications du paquet, puis laissez-le tiédir.",
+      "Faites rôtir les pois chiches 15 minutes au four avec un filet d'huile et du paprika.",
+      "Râpez les carottes, émincez le chou rouge, tranchez l'avocat.",
+      "Délayez le tahini avec le jus de citron et un peu d'eau pour la sauce.",
+      "Composez les bols avec tous les éléments, arrosez de sauce et parsemez de sésame."
+    ]
+  },
+  {
+    "externalId": "veloute-potimarron",
+    "name": "Velouté de potimarron",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/1brbso1763585098.jpg",
+    "imageSearch": "Pumpkin soup",
+    "tags": [
+      "healthy",
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Potimarron",
+        "measure": "1 (environ 1 kg)"
+      },
+      {
+        "name": "Pommes de terre",
+        "measure": "2"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Bouillon de légumes",
+        "measure": "1 L"
+      },
+      {
+        "name": "Crème fraîche",
+        "measure": "10 cl"
+      },
+      {
+        "name": "Graines de courge",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon émincé dans un filet d'huile d'olive.",
+      "Ajoutez le potimarron et les pommes de terre en morceaux (inutile d'éplucher le potimarron).",
+      "Couvrez de bouillon et laissez cuire 25 minutes.",
+      "Mixez finement avec la crème, salez et poivrez.",
+      "Servez avec les graines de courge grillées et un tour de moulin à poivre."
+    ]
+  },
+  {
+    "externalId": "galettes-courgettes",
+    "name": "Galettes de courgettes",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/nmtq3n1782772031.jpg",
+    "imageSearch": "Zucchini fritters",
+    "tags": [
+      "vegetarien",
+      "rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Courgettes",
+        "measure": "3"
+      },
+      {
+        "name": "Œufs",
+        "measure": "2"
+      },
+      {
+        "name": "Farine",
+        "measure": "80 g"
+      },
+      {
+        "name": "Feta émiettée",
+        "measure": "100 g"
+      },
+      {
+        "name": "Menthe fraîche",
+        "measure": "quelques feuilles"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "3 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Râpez les courgettes, salez-les et laissez-les dégorger 10 minutes, puis pressez-les fortement.",
+      "Mélangez-les avec les œufs, la farine, la feta et la menthe ciselée.",
+      "Formez des petites galettes et faites-les dorer 3 minutes par face dans l'huile chaude.",
+      "Égouttez sur du papier absorbant et servez avec un yaourt citronné."
+    ]
+  },
+  {
+    "externalId": "tarte-tomate-moutarde",
+    "name": "Tarte à la tomate et à la moutarde",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Pr%C3%A9paration_d%27une_tarte_%C3%A0_la_tomate_%2807%29_-_r%C3%A9sultat_%28gros_plan%29.jpg/960px-Pr%C3%A9paration_d%27une_tarte_%C3%A0_la_tomate_%2807%29_-_r%C3%A9sultat_%28gros_plan%29.jpg",
+    "imageSearch": "Tomato tart",
+    "tags": [
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Pâte feuilletée",
+        "measure": "1"
+      },
+      {
+        "name": "Tomates",
+        "measure": "5"
+      },
+      {
+        "name": "Moutarde à l'ancienne",
+        "measure": "3 c. à soupe"
+      },
+      {
+        "name": "Emmental râpé",
+        "measure": "100 g"
+      },
+      {
+        "name": "Herbes de Provence",
+        "measure": "1 c. à café"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "1 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Préchauffez le four à 200 °C et étalez la pâte dans un moule. Piquez le fond.",
+      "Tartinez la pâte de moutarde et parsemez d'emmental.",
+      "Disposez les tomates en rondelles en rosace, salez, poivrez, ajoutez les herbes et l'huile.",
+      "Enfournez 30 minutes jusqu'à ce que la pâte soit bien dorée.",
+      "Servez tiède avec une salade verte."
+    ]
+  },
+  {
+    "externalId": "saumon-four-legumes",
+    "name": "Saumon au four et petits légumes",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/1548772327.jpg",
+    "imageSearch": "Baked salmon",
+    "tags": [
+      "poisson",
+      "healthy",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Pavés de saumon",
+        "measure": "4"
+      },
+      {
+        "name": "Courgettes",
+        "measure": "2"
+      },
+      {
+        "name": "Tomates cerises",
+        "measure": "250 g"
+      },
+      {
+        "name": "Citron",
+        "measure": "1"
+      },
+      {
+        "name": "Aneth",
+        "measure": "quelques brins"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "3 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Préchauffez le four à 190 °C. Disposez les courgettes en rondelles et les tomates cerises dans un plat huilé.",
+      "Enfournez les légumes 15 minutes.",
+      "Posez les pavés de saumon sur les légumes, salez, poivrez, ajoutez rondelles de citron et aneth.",
+      "Poursuivez la cuisson 15 minutes : le saumon doit rester nacré à cœur.",
+      "Servez avec un filet d'huile d'olive et du riz si vous le souhaitez."
+    ]
+  },
+  {
+    "externalId": "papillote-cabillaud",
+    "name": "Papillote de cabillaud aux agrumes",
+    "imageUrl": "",
+    "imageSearch": "Cod parcels",
+    "tags": [
+      "poisson",
+      "healthy"
+    ],
+    "ingredients": [
+      {
+        "name": "Dos de cabillaud",
+        "measure": "4"
+      },
+      {
+        "name": "Orange",
+        "measure": "1"
+      },
+      {
+        "name": "Citron",
+        "measure": "1"
+      },
+      {
+        "name": "Fenouil",
+        "measure": "1 bulbe"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Thym",
+        "measure": "4 branches"
+      }
+    ],
+    "steps": [
+      "Préchauffez le four à 200 °C et découpez 4 grands carrés de papier cuisson.",
+      "Répartissez le fenouil émincé finement au centre de chaque feuille.",
+      "Posez le cabillaud dessus avec des rondelles d'orange et de citron, le thym, sel, poivre et un filet d'huile.",
+      "Fermez les papillotes hermétiquement et enfournez 15 minutes.",
+      "Servez les papillotes fermées, à ouvrir à table."
+    ]
+  },
+  {
+    "externalId": "moules-marinieres",
+    "name": "Moules marinières",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Normandy_%2710-_Saint-Vaast-la-Hougue_%284826863803%29.jpg/960px-Normandy_%2710-_Saint-Vaast-la-Hougue_%284826863803%29.jpg",
+    "imageSearch": "Moules marinieres",
+    "tags": [
+      "poisson",
+      "rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Moules de bouchot",
+        "measure": "2 kg"
+      },
+      {
+        "name": "Vin blanc sec",
+        "measure": "20 cl"
+      },
+      {
+        "name": "Échalotes",
+        "measure": "3"
+      },
+      {
+        "name": "Persil",
+        "measure": "1 bouquet"
+      },
+      {
+        "name": "Beurre",
+        "measure": "40 g"
+      }
+    ],
+    "steps": [
+      "Grattez et lavez les moules, jetez celles qui restent ouvertes.",
+      "Faites fondre les échalotes hachées dans le beurre, versez le vin blanc et portez à ébullition.",
+      "Ajoutez les moules, couvrez et faites cuire 5 minutes à feu vif en secouant la cocotte.",
+      "Retirez du feu dès qu'elles sont toutes ouvertes, parsemez de persil.",
+      "Servez immédiatement avec des frites ou du pain."
+    ]
+  },
+  {
+    "externalId": "crevettes-ail-persil",
+    "name": "Crevettes sautées à l'ail et au persil",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/1525873040.jpg",
+    "imageSearch": "Garlic prawns",
+    "tags": [
+      "poisson",
+      "rapide",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Crevettes crues décortiquées",
+        "measure": "500 g"
+      },
+      {
+        "name": "Ail",
+        "measure": "4 gousses"
+      },
+      {
+        "name": "Persil plat",
+        "measure": "1 bouquet"
+      },
+      {
+        "name": "Piment doux",
+        "measure": "1 pincée"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "3 c. à soupe"
+      },
+      {
+        "name": "Citron",
+        "measure": "1"
+      }
+    ],
+    "steps": [
+      "Faites chauffer l'huile avec l'ail émincé sans le laisser colorer.",
+      "Ajoutez les crevettes et le piment, faites sauter 3 à 4 minutes à feu vif.",
+      "Salez, ajoutez le persil ciselé et le jus du citron.",
+      "Servez aussitôt avec du riz ou des pâtes fraîches."
+    ]
+  },
+  {
+    "externalId": "poke-bowl-saumon",
+    "name": "Poke bowl au saumon",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Shoyu_and_onion_poke.jpg/960px-Shoyu_and_onion_poke.jpg",
+    "imageSearch": "Poke bowl",
+    "tags": [
+      "poisson",
+      "healthy",
+      "rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Saumon très frais",
+        "measure": "400 g"
+      },
+      {
+        "name": "Riz à sushi",
+        "measure": "250 g"
+      },
+      {
+        "name": "Avocat",
+        "measure": "1"
+      },
+      {
+        "name": "Concombre",
+        "measure": "1/2"
+      },
+      {
+        "name": "Edamame écossés",
+        "measure": "100 g"
+      },
+      {
+        "name": "Sauce soja",
+        "measure": "4 c. à soupe"
+      },
+      {
+        "name": "Huile de sésame",
+        "measure": "1 c. à soupe"
+      },
+      {
+        "name": "Graines de sésame",
+        "measure": "1 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Faites cuire le riz et laissez-le refroidir avec un trait de vinaigre de riz.",
+      "Coupez le saumon en cubes et faites-le mariner 10 minutes dans la sauce soja et l'huile de sésame.",
+      "Détaillez l'avocat et le concombre en dés.",
+      "Répartissez le riz dans des bols, disposez saumon, avocat, concombre et edamame.",
+      "Arrosez de marinade et parsemez de sésame."
+    ]
+  },
+  {
+    "externalId": "dos-cabillaud-curry-coco",
+    "name": "Cabillaud au curry et lait de coco",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/r7mcjm1780261264.jpg",
+    "imageSearch": "Fish curry",
+    "tags": [
+      "poisson",
+      "healthy"
+    ],
+    "ingredients": [
+      {
+        "name": "Dos de cabillaud",
+        "measure": "600 g"
+      },
+      {
+        "name": "Lait de coco",
+        "measure": "40 cl"
+      },
+      {
+        "name": "Pâte de curry jaune",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Poivron rouge",
+        "measure": "1"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Coriandre",
+        "measure": "quelques brins"
+      },
+      {
+        "name": "Citron vert",
+        "measure": "1"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon et le poivron émincés 5 minutes.",
+      "Ajoutez la pâte de curry puis le lait de coco et laissez frémir 5 minutes.",
+      "Déposez le cabillaud en gros morceaux dans la sauce et laissez pocher 8 minutes à feu doux.",
+      "Ajoutez le jus de citron vert et la coriandre.",
+      "Servez avec du riz jasmin."
+    ]
+  },
+  {
+    "externalId": "sole-meuniere",
+    "name": "Sole meunière",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Sole_meuniere_%284689490702%29.jpg/960px-Sole_meuniere_%284689490702%29.jpg",
+    "imageSearch": "Sole meuniere",
+    "tags": [
+      "poisson",
+      "rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Soles portions",
+        "measure": "4"
+      },
+      {
+        "name": "Farine",
+        "measure": "50 g"
+      },
+      {
+        "name": "Beurre",
+        "measure": "80 g"
+      },
+      {
+        "name": "Citron",
+        "measure": "1"
+      },
+      {
+        "name": "Persil haché",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Farinez légèrement les soles salées et poivrées, tapotez pour retirer l'excédent.",
+      "Faites-les cuire 3 à 4 minutes par face dans la moitié du beurre bien chaud.",
+      "Réservez au chaud, ajoutez le reste de beurre dans la poêle et laissez-le devenir noisette.",
+      "Arrosez les soles de beurre noisette, de jus de citron et de persil.",
+      "Servez avec des pommes de terre vapeur."
+    ]
+  },
+  {
+    "externalId": "brochettes-poulet-citron",
+    "name": "Brochettes de poulet marinées au citron",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/3um6il1763794322.jpg",
+    "imageSearch": "Chicken skewers",
+    "tags": [
+      "proteine",
+      "healthy"
+    ],
+    "ingredients": [
+      {
+        "name": "Blancs de poulet",
+        "measure": "600 g"
+      },
+      {
+        "name": "Citrons",
+        "measure": "2"
+      },
+      {
+        "name": "Yaourt nature",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Paprika fumé",
+        "measure": "1 c. à café"
+      },
+      {
+        "name": "Ail",
+        "measure": "2 gousses"
+      },
+      {
+        "name": "Poivrons",
+        "measure": "2"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Coupez le poulet en cubes et faites-le mariner 30 minutes dans le yaourt, le jus de citron, l'ail, le paprika et l'huile.",
+      "Montez les brochettes en alternant poulet et morceaux de poivron.",
+      "Faites griller 12 minutes à la plancha, au barbecue ou sous le gril, en tournant régulièrement.",
+      "Servez avec une semoule aux herbes et des quartiers de citron."
+    ]
+  },
+  {
+    "externalId": "escalope-dinde-creme-champignons",
+    "name": "Escalopes de dinde à la crème et aux champignons",
+    "imageUrl": "",
+    "imageSearch": "Turkey escalope",
+    "tags": [
+      "proteine",
+      "rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Escalopes de dinde",
+        "measure": "4"
+      },
+      {
+        "name": "Champignons de Paris",
+        "measure": "300 g"
+      },
+      {
+        "name": "Crème fraîche",
+        "measure": "20 cl"
+      },
+      {
+        "name": "Échalote",
+        "measure": "1"
+      },
+      {
+        "name": "Vin blanc (facultatif)",
+        "measure": "5 cl"
+      },
+      {
+        "name": "Beurre",
+        "measure": "20 g"
+      }
+    ],
+    "steps": [
+      "Faites dorer les escalopes 3 minutes par face dans le beurre, réservez.",
+      "Faites sauter l'échalote hachée et les champignons émincés dans la même poêle.",
+      "Déglacez au vin blanc, ajoutez la crème et laissez épaissir 3 minutes.",
+      "Remettez les escalopes dans la sauce 2 minutes, salez et poivrez.",
+      "Servez avec du riz ou des tagliatelles."
+    ]
+  },
+  {
+    "externalId": "wrap-poulet-crudites",
+    "name": "Wraps de poulet aux crudités",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Smoked_chicken_and_avocado_wrap.jpg/960px-Smoked_chicken_and_avocado_wrap.jpg",
+    "imageSearch": "Chicken wrap",
+    "tags": [
+      "rapide",
+      "proteine",
+      "healthy"
+    ],
+    "ingredients": [
+      {
+        "name": "Tortillas de blé",
+        "measure": "4"
+      },
+      {
+        "name": "Blancs de poulet cuits",
+        "measure": "300 g"
+      },
+      {
+        "name": "Avocat",
+        "measure": "1"
+      },
+      {
+        "name": "Carotte râpée",
+        "measure": "1"
+      },
+      {
+        "name": "Salade croquante",
+        "measure": "4 feuilles"
+      },
+      {
+        "name": "Fromage blanc",
+        "measure": "4 c. à soupe"
+      },
+      {
+        "name": "Jus de citron",
+        "measure": "1 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Mélangez le fromage blanc avec le jus de citron, sel et poivre.",
+      "Tartinez les tortillas de sauce.",
+      "Répartissez le poulet émincé, l'avocat en lamelles, la carotte et la salade.",
+      "Roulez les wraps bien serrés, coupez-les en deux et servez ou emportez."
+    ]
+  },
+  {
+    "externalId": "pot-au-feu",
+    "name": "Pot-au-feu",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pot-au-feu2.jpg/960px-Pot-au-feu2.jpg",
+    "imageSearch": "Pot au feu",
+    "tags": [
+      "comfort",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Bœuf (macreuse, gîte, plat de côtes)",
+        "measure": "1,2 kg"
+      },
+      {
+        "name": "Os à moelle",
+        "measure": "2"
+      },
+      {
+        "name": "Poireaux",
+        "measure": "3"
+      },
+      {
+        "name": "Carottes",
+        "measure": "4"
+      },
+      {
+        "name": "Navets",
+        "measure": "3"
+      },
+      {
+        "name": "Pommes de terre",
+        "measure": "6"
+      },
+      {
+        "name": "Oignon piqué de clous de girofle",
+        "measure": "1"
+      },
+      {
+        "name": "Bouquet garni",
+        "measure": "1"
+      }
+    ],
+    "steps": [
+      "Mettez les viandes dans un grand faitout d'eau froide salée et portez à ébullition en écumant.",
+      "Ajoutez l'oignon et le bouquet garni, puis laissez frémir 2 heures à couvert.",
+      "Ajoutez carottes, navets et poireaux, poursuivez 40 minutes.",
+      "Ajoutez les pommes de terre et les os à moelle pour les 25 dernières minutes.",
+      "Servez le bouillon en entrée, puis viandes et légumes avec gros sel, cornichons et moutarde."
+    ]
+  },
+  {
+    "externalId": "coq-au-vin",
+    "name": "Coq au vin",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/qstyvs1505931190.jpg",
+    "imageSearch": "Coq au vin",
+    "tags": [
+      "comfort",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Cuisses et hauts de cuisse de poulet",
+        "measure": "1,5 kg"
+      },
+      {
+        "name": "Vin rouge",
+        "measure": "75 cl"
+      },
+      {
+        "name": "Lardons",
+        "measure": "150 g"
+      },
+      {
+        "name": "Champignons de Paris",
+        "measure": "250 g"
+      },
+      {
+        "name": "Petits oignons grelots",
+        "measure": "12"
+      },
+      {
+        "name": "Carottes",
+        "measure": "2"
+      },
+      {
+        "name": "Farine",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Bouquet garni",
+        "measure": "1"
+      }
+    ],
+    "steps": [
+      "La veille si possible, faites mariner le poulet dans le vin rouge avec les carottes et le bouquet garni.",
+      "Égouttez le poulet et faites-le dorer dans une cocotte avec les lardons.",
+      "Saupoudrez de farine, mélangez, puis versez la marinade filtrée.",
+      "Laissez mijoter 1 h 15 à feu doux avec les oignons grelots.",
+      "Ajoutez les champignons sautés 15 minutes avant la fin et servez avec des pommes vapeur."
+    ]
+  },
+  {
+    "externalId": "couscous-poulet-merguez",
+    "name": "Couscous poulet et merguez",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/qxytrx1511304021.jpg",
+    "imageSearch": "Couscous",
+    "tags": [
+      "comfort",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Cuisses de poulet",
+        "measure": "4"
+      },
+      {
+        "name": "Merguez",
+        "measure": "4"
+      },
+      {
+        "name": "Semoule moyenne",
+        "measure": "400 g"
+      },
+      {
+        "name": "Carottes",
+        "measure": "3"
+      },
+      {
+        "name": "Courgettes",
+        "measure": "2"
+      },
+      {
+        "name": "Navets",
+        "measure": "2"
+      },
+      {
+        "name": "Pois chiches cuits",
+        "measure": "200 g"
+      },
+      {
+        "name": "Concentré de tomate",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Ras el-hanout",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Faites dorer les cuisses de poulet dans une cocotte, ajoutez le concentré de tomate et le ras el-hanout.",
+      "Couvrez d'eau, ajoutez carottes et navets, laissez mijoter 30 minutes.",
+      "Ajoutez les courgettes et les pois chiches, poursuivez 20 minutes.",
+      "Faites griller les merguez à la poêle et préparez la semoule selon le paquet.",
+      "Servez la semoule avec viandes, légumes et bouillon, avec de la harissa à part."
+    ]
+  },
+  {
+    "externalId": "poulet-curry-coco",
+    "name": "Poulet au curry et lait de coco",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg",
+    "imageSearch": "Chicken Handi",
+    "tags": [
+      "proteine",
+      "rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Blancs de poulet",
+        "measure": "600 g"
+      },
+      {
+        "name": "Lait de coco",
+        "measure": "40 cl"
+      },
+      {
+        "name": "Curry en poudre",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Ail",
+        "measure": "2 gousses"
+      },
+      {
+        "name": "Concentré de tomate",
+        "measure": "1 c. à soupe"
+      },
+      {
+        "name": "Huile",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon et l'ail émincés dans l'huile, ajoutez le curry et le concentré de tomate.",
+      "Ajoutez le poulet en morceaux et faites-le dorer 5 minutes.",
+      "Versez le lait de coco et laissez mijoter 15 minutes à feu doux.",
+      "Salez, poivrez et servez avec du riz basmati et de la coriandre."
+    ]
+  },
+  {
+    "externalId": "tajine-legumes",
+    "name": "Tajine de légumes aux abricots",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Tajine_008.JPG/960px-Tajine_008.JPG",
+    "imageSearch": "Vegetable tagine",
+    "tags": [
+      "vegetarien",
+      "healthy"
+    ],
+    "ingredients": [
+      {
+        "name": "Carottes",
+        "measure": "3"
+      },
+      {
+        "name": "Courgettes",
+        "measure": "2"
+      },
+      {
+        "name": "Patate douce",
+        "measure": "1"
+      },
+      {
+        "name": "Pois chiches cuits",
+        "measure": "250 g"
+      },
+      {
+        "name": "Abricots secs",
+        "measure": "8"
+      },
+      {
+        "name": "Oignon",
+        "measure": "1"
+      },
+      {
+        "name": "Épices à tajine (cumin, cannelle, gingembre)",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Amandes effilées",
+        "measure": "30 g"
+      }
+    ],
+    "steps": [
+      "Faites revenir l'oignon émincé avec les épices dans un filet d'huile d'olive.",
+      "Ajoutez les légumes en gros morceaux et enrobez-les d'épices.",
+      "Versez 25 cl d'eau, ajoutez les abricots, couvrez et laissez mijoter 35 minutes.",
+      "Ajoutez les pois chiches 10 minutes avant la fin.",
+      "Servez avec de la semoule et parsemez d'amandes grillées."
+    ]
+  },
+  {
+    "externalId": "soupe-au-pistou",
+    "name": "Soupe au pistou",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/x2fw9e1560460636.jpg",
+    "imageSearch": "Minestrone",
+    "tags": [
+      "healthy",
+      "vegetarien"
+    ],
+    "ingredients": [
+      {
+        "name": "Haricots blancs cuits",
+        "measure": "250 g"
+      },
+      {
+        "name": "Haricots verts",
+        "measure": "200 g"
+      },
+      {
+        "name": "Courgettes",
+        "measure": "2"
+      },
+      {
+        "name": "Tomates",
+        "measure": "3"
+      },
+      {
+        "name": "Petites pâtes",
+        "measure": "100 g"
+      },
+      {
+        "name": "Basilic",
+        "measure": "1 gros bouquet"
+      },
+      {
+        "name": "Ail",
+        "measure": "3 gousses"
+      },
+      {
+        "name": "Huile d'olive",
+        "measure": "8 cl"
+      },
+      {
+        "name": "Parmesan râpé",
+        "measure": "50 g"
+      }
+    ],
+    "steps": [
+      "Faites cuire les légumes coupés en dés 25 minutes dans 1,5 L d'eau bouillante salée.",
+      "Ajoutez les pâtes et les haricots blancs, poursuivez 10 minutes.",
+      "Pilez le basilic avec l'ail, l'huile d'olive et le parmesan pour obtenir le pistou.",
+      "Hors du feu, incorporez le pistou dans la soupe.",
+      "Servez bien chaud avec du parmesan supplémentaire."
+    ]
+  },
+  {
+    "externalId": "boeuf-carottes",
+    "name": "Bœuf aux carottes",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/ntafxw1763586291.jpg",
+    "imageSearch": "Beef stew",
+    "tags": [
+      "comfort",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Bœuf à braiser",
+        "measure": "800 g"
+      },
+      {
+        "name": "Carottes",
+        "measure": "8"
+      },
+      {
+        "name": "Oignons",
+        "measure": "2"
+      },
+      {
+        "name": "Bouillon de bœuf",
+        "measure": "50 cl"
+      },
+      {
+        "name": "Vin blanc",
+        "measure": "10 cl"
+      },
+      {
+        "name": "Laurier et thym",
+        "measure": "2 feuilles, 2 branches"
+      }
+    ],
+    "steps": [
+      "Faites dorer les morceaux de bœuf dans une cocotte avec un filet d'huile.",
+      "Ajoutez les oignons émincés et laissez-les fondre 5 minutes.",
+      "Déglacez au vin blanc, ajoutez le bouillon, le thym et le laurier.",
+      "Laissez mijoter 2 heures à couvert, puis ajoutez les carottes en grosses rondelles.",
+      "Poursuivez 45 minutes jusqu'à ce que la viande se défasse. Servez avec des pommes vapeur."
+    ]
+  },
+  {
+    "externalId": "gratin-courgettes-chevre",
+    "name": "Gratin de courgettes au chèvre",
+    "imageUrl": "",
+    "imageSearch": "Courgette gratin",
+    "tags": [
+      "vegetarien",
+      "healthy"
+    ],
+    "ingredients": [
+      {
+        "name": "Courgettes",
+        "measure": "4"
+      },
+      {
+        "name": "Bûche de chèvre",
+        "measure": "150 g"
+      },
+      {
+        "name": "Œufs",
+        "measure": "3"
+      },
+      {
+        "name": "Crème légère",
+        "measure": "20 cl"
+      },
+      {
+        "name": "Menthe ou basilic",
+        "measure": "quelques feuilles"
+      },
+      {
+        "name": "Chapelure",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Faites sauter les courgettes en rondelles 8 minutes pour retirer leur eau.",
+      "Battez les œufs avec la crème, salez, poivrez, ajoutez les herbes ciselées.",
+      "Disposez les courgettes dans un plat, répartissez le chèvre en rondelles, versez l'appareil.",
+      "Parsemez de chapelure et enfournez 30 minutes à 180 °C.",
+      "Servez chaud avec une salade."
+    ]
+  },
+  {
+    "externalId": "saumon-teriyaki",
+    "name": "Saumon laqué façon teriyaki",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/xxyupu1468262513.jpg",
+    "imageSearch": "Teriyaki salmon",
+    "tags": [
+      "poisson",
+      "rapide",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Pavés de saumon",
+        "measure": "4"
+      },
+      {
+        "name": "Sauce soja",
+        "measure": "6 c. à soupe"
+      },
+      {
+        "name": "Miel",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Gingembre râpé",
+        "measure": "1 c. à café"
+      },
+      {
+        "name": "Ail",
+        "measure": "1 gousse"
+      },
+      {
+        "name": "Graines de sésame",
+        "measure": "1 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Mélangez la sauce soja, le miel, le gingembre et l'ail pressé.",
+      "Faites cuire les pavés côté peau 4 minutes dans une poêle chaude.",
+      "Retournez-les, versez la sauce et laissez caraméliser 3 à 4 minutes en arrosant.",
+      "Parsemez de sésame et servez avec du riz et des brocolis vapeur."
+    ]
+  },
+  {
+    "externalId": "salade-lentilles-oeuf-mollet",
+    "name": "Salade de lentilles à l'œuf mollet",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/vpxyqt1511464175.jpg",
+    "imageSearch": "Lentil salad",
+    "tags": [
+      "healthy",
+      "vegetarien",
+      "proteine"
+    ],
+    "ingredients": [
+      {
+        "name": "Lentilles vertes",
+        "measure": "250 g"
+      },
+      {
+        "name": "Œufs",
+        "measure": "4"
+      },
+      {
+        "name": "Échalote",
+        "measure": "1"
+      },
+      {
+        "name": "Moutarde",
+        "measure": "1 c. à soupe"
+      },
+      {
+        "name": "Vinaigre de vin",
+        "measure": "2 c. à soupe"
+      },
+      {
+        "name": "Huile de colza",
+        "measure": "3 c. à soupe"
+      },
+      {
+        "name": "Persil ou ciboulette",
+        "measure": "2 c. à soupe"
+      }
+    ],
+    "steps": [
+      "Faites cuire les lentilles 25 minutes dans une eau non salée, puis égouttez-les.",
+      "Faites cuire les œufs 6 minutes dans l'eau bouillante, rafraîchissez-les et écalez-les délicatement.",
+      "Émulsionnez moutarde, vinaigre et huile, ajoutez l'échalote ciselée.",
+      "Mélangez les lentilles tièdes avec la vinaigrette et les herbes.",
+      "Servez avec les œufs mollets coupés en deux sur le dessus."
+    ]
+  }
+]

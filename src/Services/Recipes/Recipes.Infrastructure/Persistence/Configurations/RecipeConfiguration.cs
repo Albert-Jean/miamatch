@@ -13,8 +13,9 @@ namespace Recipes.Infrastructure.Persistence.Configurations
         {
             builder.ToTable("recipes");
             builder.HasKey(r => r.Id);
-            builder.Property(r => r.MealDbId).HasColumnName("meal_db_id").IsRequired();
+            builder.Property(r => r.ExternalId).HasColumnName("external_id").IsRequired();
             builder.Property(r => r.Name).HasColumnName("name").IsRequired();
+            builder.Property(r => r.Tags).HasColumnName("tags").IsRequired();
             builder.Property(r => r.Instructions).HasColumnName("instructions").IsRequired();
             builder.Property(r => r.CacheAt).HasColumnName("cache_at").IsRequired();
             builder.Property(r => r.ImageUrl).HasColumnName("image_url").IsRequired();
@@ -22,7 +23,7 @@ namespace Recipes.Infrastructure.Persistence.Configurations
             {
                 ib.ToJson();
             });
-            builder.HasIndex(r => r.MealDbId).IsUnique();
+            builder.HasIndex(r => r.ExternalId).IsUnique();
             builder.Navigation(r => r.Ingredients)
                 .UsePropertyAccessMode(PropertyAccessMode.Field);
 

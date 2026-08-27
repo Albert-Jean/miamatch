@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Recipes.Application.Abstractions;
 using Recipes.Application.Decks;
+using Recipes.Infrastructure.Catalog;
 using Recipes.Infrastructure.Persistence;
 using Recipes.Api.Endpoints;
 using Scalar.AspNetCore;
@@ -24,7 +25,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<RecipesDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("RecipesDb")));
 builder.Services.AddScoped<IDeckRepository, DeckRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
-builder.Services.AddScoped<GetOrGenerateDeckHandler>();
+builder.Services.AddScoped<GetCurrentDeckHandler>();
+builder.Services.AddScoped<GenerateDeckHandler>();
+builder.Services.AddSingleton<IRecipeCatalog, SeedRecipeCatalog>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -40,10 +43,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true
         };
     });
-builder.Services.AddHttpClient<IRecipeCatalogClient, RecipeCatalogClient>(client =>
-{
-    client.BaseAddress = new Uri("https://www.themealdb.com/api/json/v1/1/");
-});
 builder.Services.AddAuthorization();
 builder.Services.AddProblemDetails();
 

@@ -8,11 +8,48 @@
   } @else {
     <div class="mm-section-h">Vos matchs</div>
     @for (match of matchesStore.matches(); track match.recipeId) {
-      <div class="mm-row">
-        <div class="ic" [style.background-image]="'url(' + match.imageUrl + ')'"></div>
-        <div class="tx"><b>{{ match.name }}</b></div>
+      <button type="button" class="mm-row link" (click)="openRecipe(match)">
+        <div class="ic" [style.background-image]="match.imageUrl ? 'url(' + match.imageUrl + ')' : null">
+          @if (!match.imageUrl) { 🍽️ }
+        </div>
+        <div class="tx"><b>{{ match.name }}</b><small>Voir la recette</small></div>
         <span class="mm-tag match">Match</span>
-      </div>
+      </button>
     }
   }
 </div>
+
+@if (detail(); as recipe) {
+  <div class="mm-sheet-bg recipe" (click)="closeRecipe()">
+    <div class="mm-sheet mm-recipe-sheet" (click)="$event.stopPropagation()">
+      <div class="hero" [class.ph]="!recipe.imageUrl" [style.background-image]="recipe.imageUrl ? 'url(' + recipe.imageUrl + ')' : null">
+        @if (!recipe.imageUrl) {
+          <span class="emoji">{{ recipeEmoji(recipe.tags) }}</span>
+        }
+      </div>
+      <h3>{{ recipe.name }}</h3>
+      @if (recipe.tags.length) {
+        <div class="mm-meta">
+          @for (tag of recipe.tags; track tag) {
+            <span class="mm-chip">{{ categoryLabel(tag) }}</span>
+          }
+        </div>
+      }
+      <div class="mm-recipe-scroll">
+        <div class="mm-section-h">Ingrédients</div>
+        <ul class="ing">
+          @for (ingredient of recipe.ingredients; track ingredient.name) {
+            <li><b>{{ ingredient.name }}</b> — {{ ingredient.measure }}</li>
+          }
+        </ul>
+        <div class="mm-section-h">Préparation</div>
+        <ol class="steps">
+          @for (step of recipe.steps; track $index) {
+            <li>{{ step }}</li>
+          }
+        </ol>
+      </div>
+      <button class="mm-big-btn" (click)="closeRecipe()">Fermer</button>
+    </div>
+  </div>
+}

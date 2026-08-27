@@ -1,6 +1,22 @@
 <div class="mm-stage">
   @if (loading()) {
     <div class="mm-spin">Chargement du deck…</div>
+  } @else if (needsDeck()) {
+    <div class="mm-chooser">
+      <div class="big">🃏</div>
+      <h3>Ton deck de la semaine</h3>
+      <p>Choisis une ou plusieurs envies — ou ne coche rien pour te laisser surprendre.</p>
+      <div class="mm-cats">
+        @for (cat of categories; track cat.slug) {
+          <button type="button" class="mm-cat" [class.on]="isSelected(cat.slug)" (click)="toggleCategory(cat.slug)">
+            <span>{{ cat.emoji }}</span> {{ cat.label }}
+          </button>
+        }
+      </div>
+      <button class="mm-big-btn" (click)="generateDeck()" [disabled]="generating()">
+        {{ generating() ? 'Génération…' : 'Générer mon deck' }}
+      </button>
+    </div>
   } @else if (done()) {
     <div class="mm-empty">
       <div class="big">🎉</div>
@@ -19,7 +35,14 @@
         (pointerup)="isTop && onPointerUp()"
         (pointercancel)="isTop && onPointerUp()"
       >
-        <div class="top" [style.background-image]="'url(' + recipe.imageUrl + ')'">
+        <div
+          class="top"
+          [class.ph]="!recipe.imageUrl"
+          [style.background-image]="recipe.imageUrl ? 'url(' + recipe.imageUrl + ')' : null"
+        >
+          @if (!recipe.imageUrl) {
+            <div class="emoji">{{ recipeEmoji(recipe.tags) }}</div>
+          }
           @if (isTop) {
             <div class="mm-stamp like" [style.opacity]="likeOpacity()">Oui</div>
             <div class="mm-stamp pass" [style.opacity]="passOpacity()">Non</div>
@@ -27,13 +50,20 @@
         </div>
         <div class="foot">
           <h2>{{ recipe.name }}</h2>
+          @if (recipe.tags.length) {
+            <div class="mm-meta">
+              @for (tag of recipe.tags; track tag) {
+                <span class="mm-chip">{{ categoryLabel(tag) }}</span>
+              }
+            </div>
+          }
         </div>
       </div>
     }
   }
 </div>
 
-@if (!loading() && !done()) {
+@if (!loading() && !needsDeck() && !done()) {
   <div class="mm-actions">
     <button class="mm-btn undo" (click)="undo()" [disabled]="!history().length" title="Annuler">↩</button>
     <button class="mm-btn pass" (click)="commit('pass')" title="Passer">✕</button>
@@ -54,7 +84,13 @@
     }
     <div class="kicker">Ça matche</div>
     <h2>Miam !</h2>
-    <div class="em"><img [src]="recipe.imageUrl" [alt]="recipe.name" /></div>
+    <div class="em">
+      @if (recipe.imageUrl) {
+        <img [src]="recipe.imageUrl" [alt]="recipe.name" />
+      } @else {
+        {{ recipeEmoji(recipe.tags) }}
+      }
+    </div>
     <div class="who"><b>{{ recipe.name }}</b><br />Vous l'avez aimée tous les deux</div>
     <button (click)="matchModal.set(null)">Continuer à swiper</button>
   </div>
