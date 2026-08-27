@@ -1,6 +1,7 @@
 web/
 **/bin/
 **/obj/
+**/.vs/
 **/node_modules/
 **/.angular/
 .git/

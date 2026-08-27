@@ -1,4 +1,4 @@
-
+using Amazon.Lambda.AspNetCoreServer.Hosting;
 using Amazon.SimpleNotificationService;
 using Matching.Api.Endpoints;
 using Matching.Application.Abstractions;
@@ -12,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

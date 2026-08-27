@@ -1,4 +1,5 @@
 using Amazon.SQS;
+using Amazon.Lambda.AspNetCoreServer.Hosting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -11,10 +12,9 @@ using Notifications.Infrastructure.Clients;
 using Notifications.Infrastructure.Persistence;
 using Notifications.Infrastructure.Repositories;
 using Scalar.AspNetCore;
-using ShoppingList.Infrastructure.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 builder.Services.AddOpenApi();
 
 const string FrontendCorsPolicy = "Frontend";
@@ -43,9 +43,6 @@ builder.Services.AddSingleton<IAmazonSQS>(_ => new AmazonSQSClient(
         builder.Configuration["AWS:AccessKey"],
         builder.Configuration["AWS:SecretKey"]),
     new AmazonSQSConfig { RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]) }));
-
-builder.Services.AddHostedService<MatchCreatedConsumer>();
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
