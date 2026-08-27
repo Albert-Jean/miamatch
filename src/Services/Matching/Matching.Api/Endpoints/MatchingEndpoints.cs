@@ -23,21 +23,29 @@ namespace Matching.Api.Endpoints
                 }
             }
             ).RequireAuthorization();
-            app.MapGet("/matches", async (Guid householdId, ClaimsPrincipal user, IMatchRepository matchRepository) =>
+            app.MapGet("/matches", async (Guid householdId, ClaimsPrincipal user, IMatchRepository matchRepository, IRecipeClient recipeClient) =>
             {
                 var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
                 var householdsIds = user.Claims.Where(c => c.Type == "householdId").Select(c => Guid.Parse(c.Value));
                 if (householdsIds.Contains(householdId))
                 {
-                    var result = await matchRepository.GetForHouseholdAsync(householdId);
-                    return Results.Ok(result);
+                    var matches = await matchRepository.GetForHouseholdAsync(householdId);
+                    // Matching only stores recipe ids, so each match is enriched with the
+                    // name/image Recipes.Api owns before returning it to the frontend.
+                    var enriched = await Task.WhenAll(matches.Select(async m =>
+                    {
+                        var recipe = await recipeClient.GetRecipeAsync(m.RecipeId);
+                        return new MatchResponse(m.RecipeId, recipe?.Name ?? "", recipe?.ImageUrl ?? "", m.MatchedAt);
+                    }));
+                    return Results.Ok(enriched);
                 }
                 else
                 {
                     return Results.Forbid();
-                }            
+                }
             }).RequireAuthorization();
         }
     }
     public sealed record CreateSwipeRequest(Guid HouseholdId, Guid RecipeId, Guid DeckId, bool Liked);
+    public sealed record MatchResponse(Guid RecipeId, string Name, string ImageUrl, DateTime MatchedAt);
 }
