@@ -8,6 +8,7 @@ using Notifications.Application.Abstractions;
 using Notifications.Application.Notifications;
 using Notifications.Infrastructure.Client;
 using Notifications.Infrastructure.Clients;
+using Notifications.Infrastructure.Configuration;
 using Notifications.Infrastructure.Persistence;
 using Notifications.Infrastructure.Repositories;
 [assembly: Amazon.Lambda.Core.LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
@@ -21,6 +22,7 @@ public class Function
     {
         var configuration = new ConfigurationBuilder()
             .AddEnvironmentVariables()
+            .AddMiamMatchSecrets()
             .Build();
 
         var services = new ServiceCollection();

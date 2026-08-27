@@ -4,11 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Recipes.Application.Abstractions;
 using Recipes.Application.Decks;
+using Recipes.Infrastructure.Configuration;
 using Recipes.Infrastructure.Persistence;
 using Recipes.Api.Endpoints;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+// Must stay ahead of anything that reads configuration: it overrides appsettings and environment variables.
+builder.Configuration.AddMiamMatchSecrets();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ShoppingList.Application.Abstractions;
 using ShoppingList.Application.ShoppingListItems;
 using ShoppingList.Infrastructure;
+using ShoppingList.Infrastructure.Configuration;
 using ShoppingList.Infrastructure.Persistence;
 using ShoppingList.Infrastructure.Repositories;
 [assembly: Amazon.Lambda.Core.LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
@@ -20,6 +21,7 @@ public class Function
     {
         var configuration = new ConfigurationBuilder()
             .AddEnvironmentVariables()
+            .AddMiamMatchSecrets()
             .Build();
 
         var services = new ServiceCollection();
