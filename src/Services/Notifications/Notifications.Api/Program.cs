@@ -41,10 +41,9 @@ builder.Services.AddHttpClient<IHouseholdMembersClient, HouseholdMembersClient>(
 
 builder.Services.AddSingleton<IPushNotificationSender, WebPushNotificationSender>();
 
+// No explicit credentials: the SDK resolves them from the Lambda execution role in AWS
+// and from the local AWS profile in development. The role needs the sqs: actions on the queue.
 builder.Services.AddSingleton<IAmazonSQS>(_ => new AmazonSQSClient(
-    new Amazon.Runtime.BasicAWSCredentials(
-        builder.Configuration["AWS:AccessKey"],
-        builder.Configuration["AWS:SecretKey"]),
     new AmazonSQSConfig { RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]) }));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

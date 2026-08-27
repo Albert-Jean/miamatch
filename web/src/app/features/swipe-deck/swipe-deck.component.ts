@@ -2,7 +2,7 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { MatchesStoreService } from '../../core/matches/matches-store.service';
 import { ToastService } from '../../core/toast/toast.service';
-import { CurrentDeck, Recipe } from '../../core/models/recipe.model';
+import { CurrentDeck, RECIPE_CATEGORIES, Recipe, categoryLabel, recipeEmoji } from '../../core/models/recipe.model';
 import { MatchingApiService } from '../../data-access/matching-api.service';
 import { RecipesApiService } from '../../data-access/recipes-api.service';
 
@@ -30,16 +30,23 @@ export class SwipeDeckComponent implements OnInit {
   private deck: CurrentDeck | null = null;
   private pointerStart: { x: number; y: number } | null = null;
 
+  protected readonly categories = RECIPE_CATEGORIES;
+  protected readonly recipeEmoji = recipeEmoji;
+  protected readonly categoryLabel = categoryLabel;
+
   protected readonly recipes = signal<Recipe[]>([]);
   protected readonly index = signal(0);
   protected readonly history = signal<string[]>([]);
   protected readonly loading = signal(true);
+  protected readonly needsDeck = signal(false);
+  protected readonly generating = signal(false);
+  protected readonly selectedCategories = signal<string[]>([]);
   protected readonly matchModal = signal<Recipe | null>(null);
   protected readonly drag = signal<DragState>({ dx: 0, dy: 0, active: false });
   protected readonly exit = signal<SwipeDirection | null>(null);
 
   protected readonly visibleStack = computed(() => this.recipes().slice(this.index(), this.index() + 3).reverse());
-  protected readonly done = computed(() => !this.loading() && this.index() >= this.recipes().length);
+  protected readonly done = computed(() => !this.loading() && !this.needsDeck() && this.index() >= this.recipes().length);
   protected readonly confetti = Array.from({ length: 14 }, (_, i) => i);
 
   protected readonly likeOpacity = computed(() => {
@@ -56,13 +63,51 @@ export class SwipeDeckComponent implements OnInit {
     if (!householdId) return;
 
     this.recipesApi.getCurrentDeck(householdId).subscribe({
-      next: (deck) => {
-        this.deck = deck;
-        this.recipes.set(deck.recipes);
+      next: (deck) => this.setDeck(deck),
+      error: (err) => {
         this.loading.set(false);
+        this.needsDeck.set(true);
+        if (err?.status !== 404) {
+          this.toast.show('Deck indisponible (API injoignable ?)');
+        }
       },
-      error: () => this.loading.set(false),
     });
+  }
+
+  isSelected(slug: string): boolean {
+    return this.selectedCategories().includes(slug);
+  }
+
+  toggleCategory(slug: string): void {
+    this.selectedCategories.update((selected) =>
+      selected.includes(slug) ? selected.filter((s) => s !== slug) : [...selected, slug],
+    );
+  }
+
+  generateDeck(): void {
+    const householdId = this.auth.selectedHouseholdId();
+    if (!householdId || this.generating()) return;
+
+    this.generating.set(true);
+    this.recipesApi.generateDeck(householdId, this.selectedCategories()).subscribe({
+      next: (deck) => {
+        this.generating.set(false);
+        this.setDeck(deck);
+      },
+      error: () => {
+        this.generating.set(false);
+        this.toast.show('Impossible de générer le deck');
+      },
+    });
+  }
+
+  private setDeck(deck: CurrentDeck): void {
+    this.deck = deck;
+    this.recipes.set(deck.recipes);
+    this.index.set(0);
+    this.history.set([]);
+    this.needsDeck.set(false);
+    this.loading.set(false);
   }
 
   topTransform(isTop: boolean, depth: number): string {

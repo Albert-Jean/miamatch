@@ -2,9 +2,27 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "miammatch-web",
+      "name": "users-api",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "src/Services/Users/Users.Api"],
+      "port": 5025
+    },
+    {
+      "name": "matching-api",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "src/Services/Matching/Matching.Api"],
+      "port": 5041
+    },
+    {
+      "name": "recipes-api",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "src/Services/Recipes/Recipes.Api"],
+      "port": 5042
+    },
+    {
+      "name": "web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start", "--prefix", "web"],
+      "runtimeArgs": ["--prefix", "web", "start"],
       "port": 4200
     }
   ]
