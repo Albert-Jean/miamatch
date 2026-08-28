@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Match, SwipeRequest, SwipeResponse } from '../core/models/matching.model';
+import { DeckSwipeState, Match, SwipeRequest, SwipeResponse } from '../core/models/matching.model';
 
 @Injectable({ providedIn: 'root' })
 export class MatchingApiService {
@@ -10,6 +10,10 @@ export class MatchingApiService {
 
   swipe(request: SwipeRequest) {
     return this.http.post<SwipeResponse>(`${this.baseUrl}/swipes`, request);
+  }
+
+  getDeckSwipeState(householdId: string, deckId: string) {
+    return this.http.get<DeckSwipeState>(`${this.baseUrl}/swipes`, { params: { householdId, deckId } });
   }
 
   getMatches(householdId: string) {

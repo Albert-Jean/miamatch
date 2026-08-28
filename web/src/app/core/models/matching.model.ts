@@ -7,6 +7,18 @@ export interface SwipeRequest {
 
 export interface SwipeResponse {
   matched: boolean;
+  matchCount: number;
+  mealCount: number;
+  weekComplete: boolean;
+}
+
+/** Où le foyer en est sur un deck : ce que l'utilisateur a déjà swipé, et si la semaine est bouclée. */
+export interface DeckSwipeState {
+  deckId: string;
+  swipedRecipeIds: string[];
+  matchCount: number;
+  mealCount: number;
+  weekComplete: boolean;
 }
 
 export interface Match {

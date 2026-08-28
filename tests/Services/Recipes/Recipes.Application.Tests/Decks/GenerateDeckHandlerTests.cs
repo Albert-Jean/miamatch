@@ -28,12 +28,12 @@ public class GenerateDeckHandlerTests
     public async Task ExecuteAsync_WithFreshExistingDeck_ReturnsCachedDeckWithoutRegenerating()
     {
         var recipes = new[] { CreateRecipe("r1"), CreateRecipe("r2") };
-        var existingDeck = Deck.Create(_householdId, recipes.Select(r => r.Id));
+        var existingDeck = Deck.Create(_householdId, recipes.Select(r => r.Id), 2);
         _deckRepository.GetMostRecentAsync(_householdId).Returns(Task.FromResult<Deck?>(existingDeck));
         _recipeRepository.GetByIdsAsync(Arg.Is<IEnumerable<Guid>>(ids => ids.SequenceEqual(existingDeck.RecipeIds)))
             .Returns(Task.FromResult<IReadOnlyCollection<RecipeEntity>>(recipes));
 
-        var result = await _handler.ExecuteAsync(_householdId, Array.Empty<string>());
+        var result = await _handler.ExecuteAsync(_householdId, Array.Empty<string>(), 5);
 
         result.DeckId.Should().Be(existingDeck.Id);
         result.Recipes.Should().HaveCount(2);
@@ -48,7 +48,7 @@ public class GenerateDeckHandlerTests
         _deckRepository.GetMostRecentAsync(_householdId).Returns(Task.FromResult<Deck?>(null));
         _recipeRepository.GetAllAsync().Returns(Task.FromResult<IReadOnlyCollection<RecipeEntity>>(pool));
 
-        var result = await _handler.ExecuteAsync(_householdId, Array.Empty<string>());
+        var result = await _handler.ExecuteAsync(_householdId, Array.Empty<string>(), 5);
 
         result.Recipes.Should().HaveCount(20);
         await _deckRepository.Received(1).AddAsync(Arg.Is<Deck>(d => d.HouseholdId == _householdId && d.RecipeIds.Count == 20));
@@ -65,7 +65,7 @@ public class GenerateDeckHandlerTests
         _recipeRepository.GetAllAsync().Returns(Task.FromResult<IReadOnlyCollection<RecipeEntity>>(new[] { existing }));
         _recipeCatalog.GetRecipesAsync().Returns(Task.FromResult<IReadOnlyCollection<RecipeEntity>>(new[] { duplicateOfExisting, missing }));
 
-        var result = await _handler.ExecuteAsync(_householdId, Array.Empty<string>());
+        var result = await _handler.ExecuteAsync(_householdId, Array.Empty<string>(), 5);
 
         await _recipeRepository.Received(1).AddRangeAsync(Arg.Is<IEnumerable<RecipeEntity>>(rs =>
             rs.Count() == 1 && rs.Single().ExternalId == "missing"));
@@ -80,7 +80,7 @@ public class GenerateDeckHandlerTests
         _deckRepository.GetMostRecentAsync(_householdId).Returns(Task.FromResult<Deck?>(null));
         _recipeRepository.GetAllAsync().Returns(Task.FromResult<IReadOnlyCollection<RecipeEntity>>(healthy.Concat(comfort).ToList()));
 
-        var result = await _handler.ExecuteAsync(_householdId, new[] { "healthy" });
+        var result = await _handler.ExecuteAsync(_householdId, new[] { "healthy" }, 5);
 
         result.Recipes.Should().HaveCount(10);
         result.Recipes.Select(r => r.Id).Should().BeSubsetOf(healthy.Select(r => r.Id));
@@ -94,7 +94,7 @@ public class GenerateDeckHandlerTests
         _deckRepository.GetMostRecentAsync(_householdId).Returns(Task.FromResult<Deck?>(null));
         _recipeRepository.GetAllAsync().Returns(Task.FromResult<IReadOnlyCollection<RecipeEntity>>(healthy.Concat(comfort).ToList()));
 
-        var result = await _handler.ExecuteAsync(_householdId, new[] { "  Healthy " });
+        var result = await _handler.ExecuteAsync(_householdId, new[] { "  Healthy " }, 5);
 
         result.Recipes.Select(r => r.Id).Should().BeSubsetOf(healthy.Select(r => r.Id));
     }
@@ -108,7 +108,7 @@ public class GenerateDeckHandlerTests
         _deckRepository.GetMostRecentAsync(_householdId).Returns(Task.FromResult<Deck?>(expiredDeck));
         _recipeRepository.GetAllAsync().Returns(Task.FromResult<IReadOnlyCollection<RecipeEntity>>(pool));
 
-        var result = await _handler.ExecuteAsync(_householdId, Array.Empty<string>());
+        var result = await _handler.ExecuteAsync(_householdId, Array.Empty<string>(), 5);
 
         result.Recipes.Select(r => r.Id).Should().NotIntersectWith(previousIds);
     }
@@ -120,14 +120,14 @@ public class GenerateDeckHandlerTests
         _deckRepository.GetMostRecentAsync(_householdId).Returns(Task.FromResult<Deck?>(null));
         _recipeRepository.GetAllAsync().Returns(Task.FromResult<IReadOnlyCollection<RecipeEntity>>(pool));
 
-        var result = await _handler.ExecuteAsync(_householdId, new[] { "vegetarien" });
+        var result = await _handler.ExecuteAsync(_householdId, new[] { "vegetarien" }, 5);
 
         result.Recipes.Should().HaveCount(6);
     }
 
     private static Deck CreateExpiredDeck(IEnumerable<Guid> recipeIds)
     {
-        var deck = Deck.Create(Guid.NewGuid(), recipeIds);
+        var deck = Deck.Create(Guid.NewGuid(), recipeIds, 5);
         // Deck.Create stamps GeneratedAt with UtcNow, so rewind it through the backing field to simulate an old deck.
         var field = typeof(Deck).GetProperty(nameof(Deck.GeneratedAt))!.GetBackingField();
         field.SetValue(deck, DateTime.UtcNow.AddDays(-8));

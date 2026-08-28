@@ -26,5 +26,16 @@ namespace Matching.Infrastructure.Clients
 
             return await response.Content.ReadFromJsonAsync<RecipeDetails>();
         }
+
+        public async Task<DeckSummary?> GetDeckAsync(Guid deckId)
+        {
+            var response = await _httpClient.GetAsync($"decks/{deckId}");
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+
+            return await response.Content.ReadFromJsonAsync<DeckSummary>();
+        }
     }
 }

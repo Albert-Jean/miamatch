@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Matching.Application.Abstractions;
@@ -25,6 +25,12 @@ namespace Matching.Infrastructure.Persistence.Repositories
         {
             return await _context.Matches
                 .Where(m => m.HouseholdId == householdId).ToListAsync();
+        }
+
+        public async Task<int> CountForDeckAsync(Guid householdId, Guid deckId)
+        {
+            return await _context.Matches
+                .CountAsync(m => m.HouseholdId == householdId && m.DeckId == deckId);
         }
 
         public async Task AddAsync(Match match)

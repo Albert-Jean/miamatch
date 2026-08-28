@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,7 @@ namespace Matching.Application.Abstractions
     {
         Task<Match?> GetAsync(Guid householdId, Guid recipeId, Guid deckId);
         Task<IReadOnlyCollection<Match>> GetForHouseholdAsync(Guid householdId);
+        Task<int> CountForDeckAsync(Guid householdId, Guid deckId);
         Task AddAsync(Match match);
     }
 }

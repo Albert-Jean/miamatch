@@ -12,8 +12,8 @@ export class RecipesApiService {
     return this.http.get<CurrentDeck>(`${this.baseUrl}/decks/current`, { params: { householdId } });
   }
 
-  generateDeck(householdId: string, categories: string[]) {
-    return this.http.post<CurrentDeck>(`${this.baseUrl}/decks`, { householdId, categories });
+  generateDeck(householdId: string, categories: string[], mealCount: number) {
+    return this.http.post<CurrentDeck>(`${this.baseUrl}/decks`, { householdId, categories, mealCount });
   }
 
   getRecipe(id: string) {

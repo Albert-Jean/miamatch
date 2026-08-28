@@ -7,8 +7,13 @@ export interface Recipe {
 
 export interface CurrentDeck {
   deckId: string;
+  mealCount: number;
   recipes: Recipe[];
 }
+
+/** Nombre de repas proposés à la création du deck. */
+export const MEAL_COUNT_OPTIONS = [2, 3, 4, 5, 6, 7] as const;
+export const DEFAULT_MEAL_COUNT = 5;
 
 export interface RecipeIngredient {
   name: string;

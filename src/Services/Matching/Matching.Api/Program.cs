@@ -32,6 +32,7 @@ builder.Services.AddDbContext<MatchingDbContext>(options => options.UseNpgsql(bu
 builder.Services.AddScoped<ISwipeRepository, SwipeRepository>();
 builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 builder.Services.AddScoped<RecordSwipeHandler>();
+builder.Services.AddScoped<GetDeckSwipeStateHandler>();
 builder.Services.AddHttpClient<IRecipeClient, RecipeClient>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["Services:RecipesApiBaseUrl"]!);

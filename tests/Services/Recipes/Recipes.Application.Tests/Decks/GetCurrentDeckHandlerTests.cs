@@ -26,7 +26,7 @@ public class GetCurrentDeckHandlerTests
     public async Task ExecuteAsync_WithFreshDeck_ReturnsDeckWithRecipeSummaries()
     {
         var recipes = new[] { CreateRecipe("r1", "healthy"), CreateRecipe("r2") };
-        var deck = Deck.Create(_householdId, recipes.Select(r => r.Id));
+        var deck = Deck.Create(_householdId, recipes.Select(r => r.Id), 2);
         _deckRepository.GetMostRecentAsync(_householdId).Returns(Task.FromResult<Deck?>(deck));
         _recipeRepository.GetByIdsAsync(Arg.Any<IEnumerable<Guid>>())
             .Returns(Task.FromResult<IReadOnlyCollection<RecipeEntity>>(recipes));

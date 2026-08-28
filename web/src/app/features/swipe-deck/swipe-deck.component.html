@@ -1,3 +1,10 @@
+@if (swiping() && mealCount()) {
+  <div class="mm-progress">
+    <span class="lbl">{{ matchCount() }} / {{ mealCount() }} repas trouvés</span>
+    <span class="bar"><i [style.width.%]="(matchCount() / mealCount()) * 100"></i></span>
+  </div>
+}
+
 <div class="mm-stage">
   @if (loading()) {
     <div class="mm-spin">Chargement du deck…</div>
@@ -13,9 +20,23 @@
           </button>
         }
       </div>
+      <div class="mm-section-h">Combien de repas cette semaine ?</div>
+      <div class="mm-meals">
+        @for (n of mealCountOptions; track n) {
+          <button type="button" class="mm-meal" [class.on]="selectedMealCount() === n" (click)="selectedMealCount.set(n)">
+            {{ n }}
+          </button>
+        }
+      </div>
       <button class="mm-big-btn" (click)="generateDeck()" [disabled]="generating()">
         {{ generating() ? 'Génération…' : 'Générer mon deck' }}
       </button>
+    </div>
+  } @else if (weekComplete()) {
+    <div class="mm-empty">
+      <div class="big">🗓️</div>
+      <h3>Semaine planifiée</h3>
+      <p>Vos {{ mealCount() }} repas sont choisis. Retrouve-les dans l'onglet Matchs, avec les recettes et la liste de courses.</p>
     </div>
   } @else if (done()) {
     <div class="mm-empty">
@@ -63,7 +84,7 @@
   }
 </div>
 
-@if (!loading() && !needsDeck() && !done()) {
+@if (swiping()) {
   <div class="mm-actions">
     <button class="mm-btn undo" (click)="undo()" [disabled]="!history().length" title="Annuler">↩</button>
     <button class="mm-btn pass" (click)="commit('pass')" title="Passer">✕</button>
@@ -92,6 +113,8 @@
       }
     </div>
     <div class="who"><b>{{ recipe.name }}</b><br />Vous l'avez aimée tous les deux</div>
-    <button (click)="matchModal.set(null)">Continuer à swiper</button>
+    <button (click)="matchModal.set(null)">
+      {{ weekComplete() ? 'Voir la semaine' : 'Continuer à swiper' }}
+    </button>
   </div>
 }
