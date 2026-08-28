@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Recipe.Domain.Entities;
@@ -9,5 +9,6 @@ namespace Recipes.Application.Abstractions
     {
         public Task AddAsync(Deck deck);
         public Task<Deck?> GetMostRecentAsync(Guid householdId);
+        public Task<Deck?> GetByIdAsync(Guid deckId);
     }
 }

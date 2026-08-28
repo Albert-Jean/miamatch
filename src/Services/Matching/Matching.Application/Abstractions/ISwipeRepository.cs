@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,7 @@ namespace Matching.Application.Abstractions
     {
         Task<Swipe?> GetAsync(Guid userId,Guid householdId,Guid recipeId,Guid deckId);
         Task<IReadOnlyCollection<Swipe>?> GetForRecipeAsync(Guid householdId,Guid recipeId,Guid deckId);
+        Task<IReadOnlyCollection<Swipe>> GetForUserAndDeckAsync(Guid userId,Guid householdId,Guid deckId);
         Task AddAsync(Swipe swipe);        
         Task UpdateAsync(Swipe swipe);
     }

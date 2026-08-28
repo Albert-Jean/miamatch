@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Recipes.Application.Abstractions;
@@ -17,6 +17,10 @@ namespace Recipes.Infrastructure.Persistence
         {
             await _context.Decks.AddAsync(deck);
             await _context.SaveChangesAsync();
+        }
+        public async Task<Deck?> GetByIdAsync(Guid deckId)
+        {
+            return await _context.Decks.FirstOrDefaultAsync(d => d.Id == deckId);
         }
         public async Task<Deck?> GetMostRecentAsync(Guid householdId)
         {

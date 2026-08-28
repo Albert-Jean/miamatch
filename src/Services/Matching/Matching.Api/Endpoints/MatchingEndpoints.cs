@@ -1,6 +1,7 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using Matching.Application.Abstractions;
 using Matching.Application.Swipes;
+using Matching.Domain.Exceptions;
 
 namespace Matching.Api.Endpoints
 {
@@ -14,8 +15,15 @@ namespace Matching.Api.Endpoints
                 var householdsIds = user.Claims.Where(c => c.Type == "householdId").Select(c => Guid.Parse(c.Value));
             if (householdsIds.Contains(request.HouseholdId))
             {
-                var result = await handler.ExecuteAsync(userId, request.HouseholdId, request.RecipeId, request.DeckId, request.Liked);
-                return Results.Ok(result);
+                try
+                {
+                    var result = await handler.ExecuteAsync(userId, request.HouseholdId, request.RecipeId, request.DeckId, request.Liked);
+                    return Results.Ok(result);
+                }
+                catch (WeekAlreadyPlannedException ex)
+                {
+                    return Results.Conflict(new { ex.DeckId, ex.MealCount, Message = "The week is already planned." });
+                }
             }
             else
             {
@@ -23,6 +31,18 @@ namespace Matching.Api.Endpoints
                 }
             }
             ).RequireAuthorization();
+            app.MapGet("/swipes", async (Guid householdId, Guid deckId, ClaimsPrincipal user, GetDeckSwipeStateHandler handler) =>
+            {
+                var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var householdsIds = user.Claims.Where(c => c.Type == "householdId").Select(c => Guid.Parse(c.Value));
+                if (!householdsIds.Contains(householdId))
+                {
+                    return Results.Forbid();
+                }
+
+                return Results.Ok(await handler.ExecuteAsync(userId, householdId, deckId));
+            }).RequireAuthorization();
+
             app.MapGet("/matches", async (Guid householdId, ClaimsPrincipal user, IMatchRepository matchRepository, IRecipeClient recipeClient) =>
             {
                 var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);

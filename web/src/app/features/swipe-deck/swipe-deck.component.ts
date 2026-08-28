@@ -2,7 +2,15 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { MatchesStoreService } from '../../core/matches/matches-store.service';
 import { ToastService } from '../../core/toast/toast.service';
-import { CurrentDeck, RECIPE_CATEGORIES, Recipe, categoryLabel, recipeEmoji } from '../../core/models/recipe.model';
+import {
+  CurrentDeck,
+  DEFAULT_MEAL_COUNT,
+  MEAL_COUNT_OPTIONS,
+  RECIPE_CATEGORIES,
+  Recipe,
+  categoryLabel,
+  recipeEmoji,
+} from '../../core/models/recipe.model';
 import { MatchingApiService } from '../../data-access/matching-api.service';
 import { RecipesApiService } from '../../data-access/recipes-api.service';
 
@@ -31,6 +39,7 @@ export class SwipeDeckComponent implements OnInit {
   private pointerStart: { x: number; y: number } | null = null;
 
   protected readonly categories = RECIPE_CATEGORIES;
+  protected readonly mealCountOptions = MEAL_COUNT_OPTIONS;
   protected readonly recipeEmoji = recipeEmoji;
   protected readonly categoryLabel = categoryLabel;
 
@@ -41,12 +50,21 @@ export class SwipeDeckComponent implements OnInit {
   protected readonly needsDeck = signal(false);
   protected readonly generating = signal(false);
   protected readonly selectedCategories = signal<string[]>([]);
+  protected readonly selectedMealCount = signal<number>(DEFAULT_MEAL_COUNT);
+  protected readonly matchCount = signal(0);
+  protected readonly mealCount = signal(0);
+  protected readonly weekComplete = signal(false);
   protected readonly matchModal = signal<Recipe | null>(null);
   protected readonly drag = signal<DragState>({ dx: 0, dy: 0, active: false });
   protected readonly exit = signal<SwipeDirection | null>(null);
 
   protected readonly visibleStack = computed(() => this.recipes().slice(this.index(), this.index() + 3).reverse());
-  protected readonly done = computed(() => !this.loading() && !this.needsDeck() && this.index() >= this.recipes().length);
+  protected readonly done = computed(
+    () => !this.loading() && !this.needsDeck() && !this.weekComplete() && this.index() >= this.recipes().length,
+  );
+  protected readonly swiping = computed(
+    () => !this.loading() && !this.needsDeck() && !this.weekComplete() && !this.done(),
+  );
   protected readonly confetti = Array.from({ length: 14 }, (_, i) => i);
 
   protected readonly likeOpacity = computed(() => {
@@ -89,7 +107,7 @@ export class SwipeDeckComponent implements OnInit {
     if (!householdId || this.generating()) return;
 
     this.generating.set(true);
-    this.recipesApi.generateDeck(householdId, this.selectedCategories()).subscribe({
+    this.recipesApi.generateDeck(householdId, this.selectedCategories(), this.selectedMealCount()).subscribe({
       next: (deck) => {
         this.generating.set(false);
         this.setDeck(deck);
@@ -101,26 +119,53 @@ export class SwipeDeckComponent implements OnInit {
     });
   }
 
+  // The deck itself carries no per-user progress, so the swipes already recorded decide where to
+  // resume; without this the whole deck would be dealt again on every visit to the tab.
   private setDeck(deck: CurrentDeck): void {
+    const householdId = this.auth.selectedHouseholdId();
     this.deck = deck;
-    this.recipes.set(deck.recipes);
+    this.mealCount.set(deck.mealCount);
+    this.needsDeck.set(false);
+
+    if (!householdId) {
+      this.showRemaining(deck.recipes, 0, false);
+      return;
+    }
+
+    this.matchingApi.getDeckSwipeState(householdId, deck.deckId).subscribe({
+      next: (state) => {
+        const alreadySwiped = new Set(state.swipedRecipeIds);
+        this.mealCount.set(state.mealCount || deck.mealCount);
+        this.showRemaining(
+          deck.recipes.filter((r) => !alreadySwiped.has(r.id)),
+          state.matchCount,
+          state.weekComplete,
+        );
+      },
+      error: () => this.showRemaining(deck.recipes, 0, false),
+    });
+  }
+
+  private showRemaining(recipes: Recipe[], matchCount: number, weekComplete: boolean): void {
+    this.recipes.set(recipes);
+    this.matchCount.set(matchCount);
+    this.weekComplete.set(weekComplete);
     this.index.set(0);
     this.history.set([]);
-    this.needsDeck.set(false);
     this.loading.set(false);
   }
 
   topTransform(isTop: boolean, depth: number): string {
     if (!isTop) {
-      return `translateY(${depth * 10}px) scale(${1 - depth * 0.04})`;
+      return 'translateY(' + depth * 10 + 'px) scale(' + (1 - depth * 0.04) + ')';
     }
     if (this.exit()) {
       const offset = this.exit() === 'like' ? 600 : -600;
       const rotation = this.exit() === 'like' ? 24 : -24;
-      return `translate(${offset}px, 40px) rotate(${rotation}deg)`;
+      return 'translate(' + offset + 'px, 40px) rotate(' + rotation + 'deg)';
     }
     const { dx, dy } = this.drag();
-    return `translate(${dx}px, ${dy}px) rotate(${dx * 0.05}deg)`;
+    return 'translate(' + dx + 'px, ' + dy + 'px) rotate(' + dx * 0.05 + 'deg)';
   }
 
   onPointerDown(event: PointerEvent): void {
@@ -150,7 +195,7 @@ export class SwipeDeckComponent implements OnInit {
 
   commit(direction: SwipeDirection): void {
     const recipe = this.recipes()[this.index()];
-    if (!recipe || this.exit()) return;
+    if (!recipe || this.exit() || this.weekComplete()) return;
 
     const liked = direction === 'like';
     this.exit.set(direction);
@@ -167,12 +212,27 @@ export class SwipeDeckComponent implements OnInit {
 
     this.matchingApi.swipe({ householdId, recipeId: recipe.id, deckId, liked }).subscribe({
       next: (response) => {
+        this.matchCount.set(response.matchCount);
+        if (response.mealCount) {
+          this.mealCount.set(response.mealCount);
+        }
         if (liked && response.matched) {
           this.matchModal.set(recipe);
           this.matchesStore.refresh(householdId);
         }
+        if (response.weekComplete) {
+          this.weekComplete.set(true);
+        }
       },
-      error: () => this.toast.show('Swipe non enregistré (API injoignable ?)'),
+      error: (err) => {
+        // 409: another member of the household completed the week since the last refresh.
+        if (err?.status === 409) {
+          this.weekComplete.set(true);
+          this.matchesStore.refresh(householdId);
+        } else {
+          this.toast.show('Swipe non enregistré (API injoignable ?)');
+        }
+      },
     });
   }
 

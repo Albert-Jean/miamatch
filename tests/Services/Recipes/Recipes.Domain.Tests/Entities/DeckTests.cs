@@ -12,20 +12,21 @@ public class DeckTests
         var recipeIds = new[] { Guid.NewGuid(), Guid.NewGuid() };
         var before = DateTime.UtcNow;
 
-        var deck = Deck.Create(householdId, recipeIds);
+        var deck = Deck.Create(householdId, recipeIds, 2);
 
         var after = DateTime.UtcNow;
 
         deck.Id.Should().NotBeEmpty();
         deck.HouseholdId.Should().Be(householdId);
         deck.RecipeIds.Should().BeEquivalentTo(recipeIds);
+        deck.MealCount.Should().Be(2);
         deck.GeneratedAt.Should().BeOnOrAfter(before).And.BeOnOrBefore(after);
     }
 
     [Fact]
     public void Create_WithNoRecipeIds_ReturnsDeckWithEmptyRecipeIds()
     {
-        var deck = Deck.Create(Guid.NewGuid(), Array.Empty<Guid>());
+        var deck = Deck.Create(Guid.NewGuid(), Array.Empty<Guid>(), 0);
 
         deck.RecipeIds.Should().BeEmpty();
     }
@@ -33,7 +34,7 @@ public class DeckTests
     [Fact]
     public void IsExpired_WhenLessThanSevenDaysOld_ReturnsFalse()
     {
-        var deck = Deck.Create(Guid.NewGuid(), Array.Empty<Guid>());
+        var deck = Deck.Create(Guid.NewGuid(), Array.Empty<Guid>(), 0);
 
         deck.IsExpired(deck.GeneratedAt.AddDays(6)).Should().BeFalse();
     }
@@ -41,7 +42,7 @@ public class DeckTests
     [Fact]
     public void IsExpired_AtExactlySevenDays_ReturnsFalse()
     {
-        var deck = Deck.Create(Guid.NewGuid(), Array.Empty<Guid>());
+        var deck = Deck.Create(Guid.NewGuid(), Array.Empty<Guid>(), 0);
 
         deck.IsExpired(deck.GeneratedAt.AddDays(7)).Should().BeFalse();
     }
@@ -49,8 +50,24 @@ public class DeckTests
     [Fact]
     public void IsExpired_WhenMoreThanSevenDaysOld_ReturnsTrue()
     {
-        var deck = Deck.Create(Guid.NewGuid(), Array.Empty<Guid>());
+        var deck = Deck.Create(Guid.NewGuid(), Array.Empty<Guid>(), 0);
 
         deck.IsExpired(deck.GeneratedAt.AddDays(8)).Should().BeTrue();
+    }
+
+    [Fact]
+    public void Create_WithNegativeMealCount_Throws()
+    {
+        var act = () => Deck.Create(Guid.NewGuid(), new[] { Guid.NewGuid() }, -1);
+
+        act.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    [Fact]
+    public void Create_WithZeroMealCount_MeansNoLimit()
+    {
+        var deck = Deck.Create(Guid.NewGuid(), new[] { Guid.NewGuid() }, 0);
+
+        deck.MealCount.Should().Be(0);
     }
 }

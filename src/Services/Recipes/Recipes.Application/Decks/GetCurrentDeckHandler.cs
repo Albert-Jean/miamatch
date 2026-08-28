@@ -24,9 +24,9 @@ namespace Recipes.Application.Decks
 
             var recipes = await _recipeRepository.GetByIdsAsync(deck.RecipeIds);
             var summaries = recipes.Select(r => new RecipeSummary(r.Id, r.Name, r.ImageUrl, r.Tags)).ToList();
-            return new DeckResult(deck.Id, summaries);
+            return new DeckResult(deck.Id, deck.MealCount, summaries);
         }
     }
-    public sealed record DeckResult(Guid DeckId, IReadOnlyCollection<RecipeSummary> Recipes);
+    public sealed record DeckResult(Guid DeckId, int MealCount, IReadOnlyCollection<RecipeSummary> Recipes);
     public sealed record RecipeSummary(Guid Id, string Name, string ImageUrl, IReadOnlyCollection<string> Tags);
 }

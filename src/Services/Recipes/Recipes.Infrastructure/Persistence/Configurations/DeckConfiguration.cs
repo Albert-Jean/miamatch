@@ -15,6 +15,7 @@ namespace Recipes.Infrastructure.Persistence.Configurations
             builder.HasKey(d => d.Id);
             builder.Property(d => d.HouseholdId).HasColumnName("household_id").IsRequired();
             builder.Property(d => d.GeneratedAt).HasColumnName("generated_at").IsRequired();
+            builder.Property(d => d.MealCount).HasColumnName("meal_count").IsRequired();
             builder.PrimitiveCollection(d => d.RecipeIds)
                     .HasColumnName("recipe_ids")
                     .IsRequired()

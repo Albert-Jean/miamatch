@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Matching.Application.Abstractions;
@@ -26,6 +26,13 @@ namespace Matching.Infrastructure.Persistence.Repositories
         {
             return await _context.Swipes
                 .Where(s => s.HouseholdId == householdId && s.RecipeId == recipeId && s.DeckId == deckId)
+                .ToListAsync();
+        }
+
+        public async Task<IReadOnlyCollection<Swipe>> GetForUserAndDeckAsync(Guid userId, Guid householdId, Guid deckId)
+        {
+            return await _context.Swipes
+                .Where(s => s.UserId == userId && s.HouseholdId == householdId && s.DeckId == deckId)
                 .ToListAsync();
         }
 

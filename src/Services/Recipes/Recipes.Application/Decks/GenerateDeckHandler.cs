@@ -20,13 +20,13 @@ namespace Recipes.Application.Decks
             _recipeRepository = recipeRepository;
             _recipeCatalog = recipeCatalog;
         }
-        public async Task<DeckResult> ExecuteAsync(Guid householdId, IReadOnlyCollection<string> categories)
+        public async Task<DeckResult> ExecuteAsync(Guid householdId, IReadOnlyCollection<string> categories, int mealCount)
         {
             var existingDeck = await _deckRepository.GetMostRecentAsync(householdId);
             if (existingDeck is not null && !existingDeck.IsExpired(DateTime.UtcNow))
             {
                 var currentRecipes = await _recipeRepository.GetByIdsAsync(existingDeck.RecipeIds);
-                return new DeckResult(existingDeck.Id, currentRecipes.Select(ToSummary).ToList());
+                return new DeckResult(existingDeck.Id, existingDeck.MealCount, currentRecipes.Select(ToSummary).ToList());
             }
 
             var pool = (await _recipeRepository.GetAllAsync()).ToList();
@@ -52,11 +52,15 @@ namespace Recipes.Application.Decks
             var excludedRecipeIds = existingDeck?.RecipeIds ?? Array.Empty<Guid>();
             var recipeIds = DeckGenerator.GenerateRecipeIds(candidates.Select(r => r.Id).ToList(), excludedRecipeIds.ToList(), DeckSize);
 
-            var deck = Deck.Create(householdId, recipeIds);
+            // A narrow category filter can leave fewer cards than the requested meals; asking for
+            // more meals than there are cards would build a deck that can never close.
+            var effectiveMealCount = Math.Min(mealCount, recipeIds.Count);
+
+            var deck = Deck.Create(householdId, recipeIds, effectiveMealCount);
             await _deckRepository.AddAsync(deck);
 
             var selectedRecipes = candidates.Where(r => recipeIds.Contains(r.Id));
-            return new DeckResult(deck.Id, selectedRecipes.Select(ToSummary).ToList());
+            return new DeckResult(deck.Id, deck.MealCount, selectedRecipes.Select(ToSummary).ToList());
         }
 
         private static RecipeSummary ToSummary(Recipes.Domain.Entities.Recipe recipe) =>
