@@ -26,41 +26,22 @@ jobs:
   tests:
     uses: ./.github/workflows/ci.yml
 
-  # Les noms des ressources AWS viennent des variables de repo. Une variable
-  # oubliee produirait un "--function-name " vide au milieu du deploiement, une
-  # fois les images deja poussees : on echoue avant, avec la liste des manquantes.
+  # Sans role assumable, les jobs suivants echoueraient apres le checkout et le
+  # build : on le dit tout de suite, et en nommant la variable a remplir.
   config:
     runs-on: ubuntu-latest
     steps:
-      - name: Verifier les variables de repo
+      - name: Verifier la variable de repo AWS_DEPLOY_ROLE_ARN
         env:
           AWS_DEPLOY_ROLE_ARN: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
-          USERS_API_LAMBDA: ${{ vars.USERS_API_LAMBDA }}
-          RECIPES_API_LAMBDA: ${{ vars.RECIPES_API_LAMBDA }}
-          MATCHING_API_LAMBDA: ${{ vars.MATCHING_API_LAMBDA }}
-          NOTIFICATIONS_API_LAMBDA: ${{ vars.NOTIFICATIONS_API_LAMBDA }}
-          NOTIFICATIONS_CONSUMER_LAMBDA: ${{ vars.NOTIFICATIONS_CONSUMER_LAMBDA }}
-          SHOPPINGLIST_API_LAMBDA: ${{ vars.SHOPPINGLIST_API_LAMBDA }}
-          SHOPPINGLIST_CONSUMER_LAMBDA: ${{ vars.SHOPPINGLIST_CONSUMER_LAMBDA }}
         run: |
-          missing=()
-          for name in AWS_DEPLOY_ROLE_ARN \
-                      USERS_API_LAMBDA \
-                      RECIPES_API_LAMBDA \
-                      MATCHING_API_LAMBDA \
-                      NOTIFICATIONS_API_LAMBDA \
-                      NOTIFICATIONS_CONSUMER_LAMBDA \
-                      SHOPPINGLIST_API_LAMBDA \
-                      SHOPPINGLIST_CONSUMER_LAMBDA; do
-            [ -n "${!name}" ] || missing+=("$name")
-          done
-          if [ ${#missing[@]} -gt 0 ]; then
-            echo "Variables de repo manquantes : ${missing[*]}" >&2
+          if [ -z "$AWS_DEPLOY_ROLE_ARN" ]; then
+            echo "Variable de repo AWS_DEPLOY_ROLE_ARN absente." >&2
             echo "A renseigner dans Settings > Secrets and variables > Actions > Variables." >&2
-            echo "Voir infra/README.md pour la liste complete et la mise en place du role OIDC." >&2
+            echo "Voir infra/README.md pour la creation du role et de sa trust policy." >&2
             exit 1
           fi
-          echo "Toutes les variables requises sont renseignees."
+          echo "Role de deploiement : $AWS_DEPLOY_ROLE_ARN"
 
   backend:
     needs: [tests, config]
@@ -69,38 +50,40 @@ jobs:
       # Un service qui echoue ne doit pas empecher les autres d'arriver a jour :
       # ils sont deployes independamment.
       #
-      # Les repos ECR existants suivent tous la convention miamatch-<service> :
-      # la variable <SERVICE>_ECR_REPOSITORY n'est la que pour un renommage.
+      # Les noms ci-dessous sont ceux des ressources en place ; les variables de
+      # repo <SERVICE>_LAMBDA et <SERVICE>_ECR_REPOSITORY ne servent qu'a les
+      # surcharger. Les deux consumers portent un suffixe -api cote Lambda mais
+      # pas cote ECR, d'ou les noms ecrits en entier plutot que derives.
       fail-fast: false
       matrix:
         include:
           - service: users-api
             dockerfile: src/Services/Users/Users.Api/Dockerfile
-            lambda: ${{ vars.USERS_API_LAMBDA }}
+            lambda: ${{ vars.USERS_API_LAMBDA || 'miamatch-users-api' }}
             ecr: ${{ vars.USERS_API_ECR_REPOSITORY || 'miamatch-users-api' }}
           - service: recipes-api
             dockerfile: src/Services/Recipes/Recipes.Api/Dockerfile
-            lambda: ${{ vars.RECIPES_API_LAMBDA }}
+            lambda: ${{ vars.RECIPES_API_LAMBDA || 'miamatch-recipes-api' }}
             ecr: ${{ vars.RECIPES_API_ECR_REPOSITORY || 'miamatch-recipes-api' }}
           - service: matching-api
             dockerfile: src/Services/Matching/Matching.Api/Dockerfile
-            lambda: ${{ vars.MATCHING_API_LAMBDA }}
+            lambda: ${{ vars.MATCHING_API_LAMBDA || 'miamatch-matching-api' }}
             ecr: ${{ vars.MATCHING_API_ECR_REPOSITORY || 'miamatch-matching-api' }}
           - service: notifications-api
             dockerfile: src/Services/Notifications/Notifications.Api/Dockerfile
-            lambda: ${{ vars.NOTIFICATIONS_API_LAMBDA }}
+            lambda: ${{ vars.NOTIFICATIONS_API_LAMBDA || 'miamatch-notifications-api' }}
             ecr: ${{ vars.NOTIFICATIONS_API_ECR_REPOSITORY || 'miamatch-notifications-api' }}
           - service: notifications-consumer
             dockerfile: src/Services/Notifications/Notifications.Consumer/Dockerfile
-            lambda: ${{ vars.NOTIFICATIONS_CONSUMER_LAMBDA }}
+            lambda: ${{ vars.NOTIFICATIONS_CONSUMER_LAMBDA || 'miamatch-notifications-consumer-api' }}
             ecr: ${{ vars.NOTIFICATIONS_CONSUMER_ECR_REPOSITORY || 'miamatch-notifications-consumer' }}
           - service: shoppinglist-api
             dockerfile: src/Services/ShoppingList/ShoppingList.Api/Dockerfile
-            lambda: ${{ vars.SHOPPINGLIST_API_LAMBDA }}
+            lambda: ${{ vars.SHOPPINGLIST_API_LAMBDA || 'miamatch-shoppinglist-api' }}
             ecr: ${{ vars.SHOPPINGLIST_API_ECR_REPOSITORY || 'miamatch-shoppinglist-api' }}
           - service: shoppinglist-consumer
             dockerfile: src/Services/ShoppingList/ShoppingList.Consumer/Dockerfile
-            lambda: ${{ vars.SHOPPINGLIST_CONSUMER_LAMBDA }}
+            lambda: ${{ vars.SHOPPINGLIST_CONSUMER_LAMBDA || 'miamatch-shoppinglist-consumer-api' }}
             ecr: ${{ vars.SHOPPINGLIST_CONSUMER_ECR_REPOSITORY || 'miamatch-shoppinglist-consumer' }}
     steps:
       - uses: actions/checkout@v4

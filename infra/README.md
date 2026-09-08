@@ -15,7 +15,7 @@
 - `.github/workflows/ci.yml` : `dotnet restore/build/test`. Tourne sur chaque pull request,
   et est appele par le workflow de deploiement.
 - `.github/workflows/deploy.yml` : sur chaque push vers `master` (ou a la main via
-  *Run workflow*), enchaine tests -> verification des variables -> images backend -> frontend.
+  *Run workflow*), enchaine tests -> verification du role -> images backend -> frontend.
 
 Un push sur `master` produit donc, sans intervention :
 
@@ -173,30 +173,38 @@ depot fantome.
 *Settings > Secrets and variables > Actions > onglet Variables.* Ce sont des variables,
 pas des secrets : elles ne contiennent aucune donnee sensible.
 
+Une seule est obligatoire, les autres n'existent que pour surcharger un defaut :
+
 | Variable | Obligatoire | Valeur |
 | --- | --- | --- |
 | `AWS_DEPLOY_ROLE_ARN` | oui | `arn:aws:iam::987119353333:role/miamatch-github-deploy` |
 | `AWS_REGION` | non | Defaut `eu-west-3` |
-| `USERS_API_LAMBDA` | oui | Nom de la fonction Lambda |
-| `RECIPES_API_LAMBDA` | oui | idem |
-| `MATCHING_API_LAMBDA` | oui | idem |
-| `NOTIFICATIONS_API_LAMBDA` | oui | idem |
-| `NOTIFICATIONS_CONSUMER_LAMBDA` | oui | idem |
-| `SHOPPINGLIST_API_LAMBDA` | oui | idem |
-| `SHOPPINGLIST_CONSUMER_LAMBDA` | oui | idem |
-| `<SERVICE>_ECR_REPOSITORY` | non | Defaut `miamatch-<service>`, le nom des repos existants ; utile seulement en cas de renommage |
+| `<SERVICE>_LAMBDA` | non | Defaut : le nom en place (tableau ci-dessous) |
+| `<SERVICE>_ECR_REPOSITORY` | non | Defaut `miamatch-<service>` |
 | `WEB_BUCKET` | non | Defaut `miamatch-web-987119353333` |
 | `WEB_CLOUDFRONT_DISTRIBUTION_ID` | non | Defaut `E33JYQMGL6YN25` |
 
-Les noms exacts deja en place se retrouvent avec :
+Les cibles cablees dans `deploy.yml`. Les deux consumers portent un suffixe `-api` cote
+Lambda mais pas cote ECR : les noms sont donc ecrits en entier plutot que derives d'une
+regle.
+
+| Service | Repo ECR | Fonction Lambda |
+| --- | --- | --- |
+| `users-api` | `miamatch-users-api` | `miamatch-users-api` |
+| `recipes-api` | `miamatch-recipes-api` | `miamatch-recipes-api` |
+| `matching-api` | `miamatch-matching-api` | `miamatch-matching-api` |
+| `notifications-api` | `miamatch-notifications-api` | `miamatch-notifications-api` |
+| `notifications-consumer` | `miamatch-notifications-consumer` | `miamatch-notifications-consumer-api` |
+| `shoppinglist-api` | `miamatch-shoppinglist-api` | `miamatch-shoppinglist-api` |
+| `shoppinglist-consumer` | `miamatch-shoppinglist-consumer` | `miamatch-shoppinglist-consumer-api` |
+
+Apres un renommage cote AWS, la variable correspondante evite d'avoir a toucher au
+workflow. Pour verifier ce qui existe reellement :
 
 ```bash
 aws lambda list-functions --region eu-west-3 --query "Functions[].FunctionName" --output table
 aws ecr describe-repositories --region eu-west-3 --query "repositories[].repositoryName" --output table
 ```
-
-Si une variable obligatoire manque, le job `config` echoue en les listant, avant toute
-poussee d'image.
 
 ## Ce que le pipeline ne fait pas
 
