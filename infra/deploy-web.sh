@@ -3,12 +3,15 @@
 #
 #   ./infra/deploy-web.sh
 #
-# Necessite une session AWS active (aws login) et npm.
+# Necessite une session AWS active (aws login) et npm. Les trois variables
+# ci-dessous permettent au workflow GitHub Actions de viser un autre bucket ou
+# une autre distribution sans dupliquer le script ; sans elles, les valeurs par
+# defaut sont celles de la prod.
 set -euo pipefail
 
-BUCKET=miamatch-web-987119353333
-DISTRIBUTION=E33JYQMGL6YN25
-REGION=eu-west-3
+BUCKET=${MIAMMATCH_WEB_BUCKET:-miamatch-web-987119353333}
+DISTRIBUTION=${MIAMMATCH_WEB_DISTRIBUTION:-E33JYQMGL6YN25}
+REGION=${AWS_REGION:-eu-west-3}
 
 cd "$(dirname "$0")/.."
 
@@ -40,4 +43,7 @@ ID=$(aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION" \
   --paths "/index.html" "/" --query "Invalidation.Id" --output text)
 aws cloudfront wait invalidation-completed --distribution-id "$DISTRIBUTION" --id "$ID"
 
-echo "==> En ligne : https://d1uu986wsttg61.cloudfront.net"
+# Lu depuis la distribution plutot qu'ecrit en dur : l'URL suit le bucket cible.
+DOMAIN=$(aws cloudfront get-distribution --id "$DISTRIBUTION" \
+  --query "Distribution.DomainName" --output text)
+echo "==> En ligne : https://$DOMAIN"

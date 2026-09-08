@@ -1,0 +1,166 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  # Permet de rejouer un deploiement sans nouveau commit.
+  workflow_dispatch:
+
+# Un seul deploiement a la fois : deux pushes rapproches enverraient sinon deux
+# images concurrentes vers la meme fonction Lambda, et la derniere arrivee ne
+# serait pas forcement la plus recente.
+concurrency:
+  group: deploy-master
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  # Necessaire pour obtenir le jeton OIDC echange contre le role IAM de deploiement.
+  id-token: write
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION || 'eu-west-3' }}
+
+jobs:
+  # Les tests d'abord : rien ne part en production sur une branche rouge.
+  tests:
+    uses: ./.github/workflows/ci.yml
+
+  # Sans role assumable, les jobs suivants echoueraient apres le checkout et le
+  # build : on le dit tout de suite, et en nommant la variable a remplir.
+  config:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verifier la variable de repo AWS_DEPLOY_ROLE_ARN
+        env:
+          AWS_DEPLOY_ROLE_ARN: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+        run: |
+          if [ -z "$AWS_DEPLOY_ROLE_ARN" ]; then
+            echo "Variable de repo AWS_DEPLOY_ROLE_ARN absente." >&2
+            echo "A renseigner dans Settings > Secrets and variables > Actions > Variables." >&2
+            echo "Voir infra/README.md pour la creation du role et de sa trust policy." >&2
+            exit 1
+          fi
+          echo "Role de deploiement : $AWS_DEPLOY_ROLE_ARN"
+
+  backend:
+    needs: [tests, config]
+    runs-on: ubuntu-latest
+    strategy:
+      # Un service qui echoue ne doit pas empecher les autres d'arriver a jour :
+      # ils sont deployes independamment.
+      #
+      # Les noms ci-dessous sont ceux des ressources en place ; les variables de
+      # repo <SERVICE>_LAMBDA et <SERVICE>_ECR_REPOSITORY ne servent qu'a les
+      # surcharger. Les deux consumers portent un suffixe -api cote Lambda mais
+      # pas cote ECR, d'ou les noms ecrits en entier plutot que derives.
+      fail-fast: false
+      matrix:
+        include:
+          - service: users-api
+            dockerfile: src/Services/Users/Users.Api/Dockerfile
+            lambda: ${{ vars.USERS_API_LAMBDA || 'miamatch-users-api' }}
+            ecr: ${{ vars.USERS_API_ECR_REPOSITORY || 'miamatch-users-api' }}
+          - service: recipes-api
+            dockerfile: src/Services/Recipes/Recipes.Api/Dockerfile
+            lambda: ${{ vars.RECIPES_API_LAMBDA || 'miamatch-recipes-api' }}
+            ecr: ${{ vars.RECIPES_API_ECR_REPOSITORY || 'miamatch-recipes-api' }}
+          - service: matching-api
+            dockerfile: src/Services/Matching/Matching.Api/Dockerfile
+            lambda: ${{ vars.MATCHING_API_LAMBDA || 'miamatch-matching-api' }}
+            ecr: ${{ vars.MATCHING_API_ECR_REPOSITORY || 'miamatch-matching-api' }}
+          - service: notifications-api
+            dockerfile: src/Services/Notifications/Notifications.Api/Dockerfile
+            lambda: ${{ vars.NOTIFICATIONS_API_LAMBDA || 'miamatch-notifications-api' }}
+            ecr: ${{ vars.NOTIFICATIONS_API_ECR_REPOSITORY || 'miamatch-notifications-api' }}
+          - service: notifications-consumer
+            dockerfile: src/Services/Notifications/Notifications.Consumer/Dockerfile
+            lambda: ${{ vars.NOTIFICATIONS_CONSUMER_LAMBDA || 'miamatch-notifications-consumer-api' }}
+            ecr: ${{ vars.NOTIFICATIONS_CONSUMER_ECR_REPOSITORY || 'miamatch-notifications-consumer' }}
+          - service: shoppinglist-api
+            dockerfile: src/Services/ShoppingList/ShoppingList.Api/Dockerfile
+            lambda: ${{ vars.SHOPPINGLIST_API_LAMBDA || 'miamatch-shoppinglist-api' }}
+            ecr: ${{ vars.SHOPPINGLIST_API_ECR_REPOSITORY || 'miamatch-shoppinglist-api' }}
+          - service: shoppinglist-consumer
+            dockerfile: src/Services/ShoppingList/ShoppingList.Consumer/Dockerfile
+            lambda: ${{ vars.SHOPPINGLIST_CONSUMER_LAMBDA || 'miamatch-shoppinglist-consumer-api' }}
+            ecr: ${{ vars.SHOPPINGLIST_CONSUMER_ECR_REPOSITORY || 'miamatch-shoppinglist-consumer' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prendre le role de deploiement
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          role-session-name: miamatch-deploy-${{ matrix.service }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Se connecter a ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Construire et pousser l'image
+        uses: docker/build-push-action@v6
+        with:
+          # Les Dockerfile copient depuis la racine du depot (src/Services/...).
+          context: .
+          file: ${{ matrix.dockerfile }}
+          push: true
+          # Les fonctions tournent en x86_64 ; passer en arm64 demande de changer
+          # aussi l'architecture de la Lambda et d'ajouter setup-qemu-action.
+          platforms: linux/amd64
+          # Les attestations transforment la publication en index OCI multi-manifestes,
+          # que Lambda refuse : il lui faut une image simple.
+          provenance: false
+          sbom: false
+          tags: |
+            ${{ steps.ecr.outputs.registry }}/${{ matrix.ecr }}:${{ github.sha }}
+            ${{ steps.ecr.outputs.registry }}/${{ matrix.ecr }}:latest
+          cache-from: type=gha,scope=${{ matrix.service }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.service }}
+
+      - name: Deployer la fonction Lambda
+        env:
+          # Le tag immuable plutot que latest : deux deploiements rapproches
+          # pourraient sinon voir la fonction resoudre l'image de l'autre.
+          IMAGE: ${{ steps.ecr.outputs.registry }}/${{ matrix.ecr }}:${{ github.sha }}
+        run: |
+          aws lambda update-function-code \
+            --function-name "${{ matrix.lambda }}" \
+            --image-uri "$IMAGE" \
+            --no-cli-pager
+          # La mise a jour du code est asynchrone : sans attente, le job passerait
+          # au vert avant que la fonction serve reellement la nouvelle image.
+          aws lambda wait function-updated-v2 --function-name "${{ matrix.lambda }}"
+          echo "${{ matrix.lambda }} deployee depuis $IMAGE" >> "$GITHUB_STEP_SUMMARY"
+
+  # Le front part apres le backend : l'inverse exposerait une interface qui
+  # appelle des endpoints pas encore deployes.
+  frontend:
+    needs: [tests, config, backend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Prendre le role de deploiement
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          role-session-name: miamatch-deploy-web
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Le meme script que pour un deploiement a la main, pour que les deux
+      # chemins ne divergent pas.
+      - name: Deployer sur S3 + CloudFront
+        run: ./infra/deploy-web.sh
+        env:
+          MIAMMATCH_WEB_BUCKET: ${{ vars.WEB_BUCKET }}
+          MIAMMATCH_WEB_DISTRIBUTION: ${{ vars.WEB_CLOUDFRONT_DISTRIBUTION_ID }}
