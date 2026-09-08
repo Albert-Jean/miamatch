@@ -206,6 +206,54 @@ aws lambda list-functions --region eu-west-3 --query "Functions[].FunctionName" 
 aws ecr describe-repositories --region eu-west-3 --query "repositories[].repositoryName" --output table
 ```
 
+## Securite
+
+Le depot est public. Ce qui suit explique ce qui protege le compte AWS, et ce qui ne le
+protege pas.
+
+### L'ARN du role est une variable, pas un secret
+
+Volontairement. Un ARN n'est pas un identifiant : le connaitre ne permet pas d'assumer le
+role. La seule chose qui autorise `sts:AssumeRoleWithWebIdentity`, c'est la trust policy,
+qui exige un jeton OIDC signe par GitHub dont le `sub` vaut
+`repo:Albert-Jean/miamatch:ref:refs/heads/master`. Ce jeton n'est delivre qu'aux workflows
+tournant sur `master` de ce depot ; il ne se fabrique pas.
+
+Le numero de compte, lui, est de toute facon deja dans le code versionne : nom du bucket
+dans `deploy-web.sh`, ARN de topic SNS et URLs de files SQS dans les `appsettings.json`.
+Le mettre en secret masquerait une valeur lisible ailleurs dans le depot.
+
+En variable, une erreur STS affiche l'ARN refuse dans les logs. En secret, GitHub le
+remplace par `***` et une faute de frappe se cherche a l'aveugle.
+
+### Ce qui protege reellement le compte
+
+1. **La condition `sub` de la trust policy.** Sans elle, n'importe quel depot GitHub peut
+   assumer le role. Attention aux variantes en `StringLike` : un `repo:Albert-Jean/*`
+   couvrirait un depot cree par un homonyme.
+2. **Aucun jeton OIDC sur les pull requests.** `deploy.yml` ne se declenche que sur push
+   `master` et `workflow_dispatch` ; `ci.yml`, le seul workflow qui tourne sur les PR, n'a
+   pas `id-token: write`. Deux regles a tenir : ne jamais utiliser `pull_request_target`,
+   et ne jamais donner `id-token: write` a un workflow declenchable depuis un fork.
+3. **L'approbation des workflows de fork**, dans *Settings > Actions > Fork pull request
+   workflows* : garder au minimum *Require approval for first-time contributors*.
+4. **La protection de `master`.** C'est desormais le vrai vecteur : qui peut y pousser
+   deploie en production. Une branch protection exigeant une pull request et une CI verte
+   vaut plus que n'importe quel masquage d'ARN.
+
+### Le role ne peut pas detruire
+
+La policy ne permet de creer ni de supprimer aucune ressource. Elle autorise quatre
+choses : pousser une image, remplacer le code d'une Lambda, ecrire et supprimer des objets
+du bucket web (ce que `s3 sync --delete` exige), invalider CloudFront. Un jeton vole
+deploierait donc du code et pourrait vider le front, mais ne toucherait ni aux bases, ni
+aux files SQS, ni aux fonctions elles-memes, ni a Secrets Manager.
+
+Cote applicatif, rien de sensible n'est versionne : les `appsettings.json` ne contiennent
+que des valeurs de developpement local (base `localhost`, cle VAPID publique). En
+production, `MIAMMATCH_SECRET_ID` fait lire la vraie configuration dans Secrets Manager,
+et les appels AWS sont signes par le role d'execution de la Lambda.
+
 ## Ce que le pipeline ne fait pas
 
 - **Migrations EF Core.** RDS n'est pas joignable depuis un runner GitHub, et une migration
