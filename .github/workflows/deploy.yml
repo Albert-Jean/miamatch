@@ -43,6 +43,29 @@ jobs:
           fi
           echo "Role de deploiement : $AWS_DEPLOY_ROLE_ARN"
 
+      # STS refuse un jeton sans jamais dire quel claim l'a fait echouer, et le
+      # message est le meme que le provider soit absent, l'audience non declaree
+      # ou le `sub` non couvert. Ces trois lignes donnent ce que la trust policy
+      # doit accepter, mot pour mot. Aucun secret : le jeton lui-meme n'est pas
+      # affiche, seulement l'identite qu'il revendique.
+      - name: Afficher les claims OIDC presentes a AWS
+        run: |
+          python3 - <<'PY'
+          import base64, json, os, urllib.request
+
+          url = os.environ["ACTIONS_ID_TOKEN_REQUEST_URL"] + "&audience=sts.amazonaws.com"
+          request = urllib.request.Request(
+              url,
+              headers={"Authorization": "bearer " + os.environ["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]},
+          )
+          token = json.load(urllib.request.urlopen(request))["value"]
+          # JWT : entete.charge.signature, en base64url sans padding.
+          payload = token.split(".")[1]
+          claims = json.loads(base64.urlsafe_b64decode(payload + "=" * (-len(payload) % 4)))
+          for claim in ("iss", "aud", "sub"):
+              print(f"{claim}: {claims.get(claim)}")
+          PY
+
   backend:
     needs: [tests, config]
     runs-on: ubuntu-latest
