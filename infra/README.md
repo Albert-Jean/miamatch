@@ -68,7 +68,7 @@ recupere des identifiants temporaires. Trust policy (`trust.json`) :
       "Condition": {
         "StringEquals": {
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-          "token.actions.githubusercontent.com:sub": "repo:Albert-Jean/miamatch:ref:refs/heads/master"
+          "token.actions.githubusercontent.com:sub": "repo:Albert-Jean@127751661/miamatch@1333564457:ref:refs/heads/master"
         }
       }
     }
@@ -78,6 +78,13 @@ recupere des identifiants temporaires. Trust policy (`trust.json`) :
 
 La condition `sub` limite le role a `master` : une pull request depuis un fork ne peut pas
 l'assumer, meme si elle modifie le workflow.
+
+Les `@127751661` et `@1333564457` ne sont pas decoratifs. GitHub emet un *subject claim
+immuable* : le login du proprietaire et le nom du depot sont suivis de leurs identifiants
+numeriques, pour qu'un renommage de compte ne permette pas d'usurper l'ancien nom. Un
+`sub` ecrit sous la forme courante `repo:Albert-Jean/miamatch:ref:refs/heads/master` ne
+correspond a rien et STS refuse, sans jamais dire quel claim a echoue. La valeur exacte a
+recopier est celle qu'affiche le job `config` de chaque run.
 
 ```bash
 aws iam create-role --role-name miamatch-github-deploy \
@@ -216,8 +223,9 @@ protege pas.
 Volontairement. Un ARN n'est pas un identifiant : le connaitre ne permet pas d'assumer le
 role. La seule chose qui autorise `sts:AssumeRoleWithWebIdentity`, c'est la trust policy,
 qui exige un jeton OIDC signe par GitHub dont le `sub` vaut
-`repo:Albert-Jean/miamatch:ref:refs/heads/master`. Ce jeton n'est delivre qu'aux workflows
-tournant sur `master` de ce depot ; il ne se fabrique pas.
+`repo:Albert-Jean@127751661/miamatch@1333564457:ref:refs/heads/master`. Ce jeton n'est delivre
+qu'aux workflows tournant sur `master` de ce depot ; il ne se fabrique pas, et les
+identifiants numeriques qu'il porte survivent a un renommage de compte.
 
 Le numero de compte, lui, est de toute facon deja dans le code versionne : nom du bucket
 dans `deploy-web.sh`, ARN de topic SNS et URLs de files SQS dans les `appsettings.json`.
