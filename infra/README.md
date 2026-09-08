@@ -153,18 +153,20 @@ aws iam put-role-policy --role-name miamatch-github-deploy \
 
 ### 3. Repos ECR
 
-Un repo par image, s'ils n'existent pas deja
-(`aws ecr describe-repositories --query "repositories[].repositoryName"`) :
+Les sept repos existent deja et suivent la convention `miamatch-<service>` :
+`miamatch-users-api`, `miamatch-recipes-api`, `miamatch-matching-api`,
+`miamatch-notifications-api`, `miamatch-notifications-consumer`,
+`miamatch-shoppinglist-api`, `miamatch-shoppinglist-consumer`. Le workflow les vise par
+defaut, il n'y a donc rien a faire ici.
+
+Pour un nouveau service :
 
 ```bash
-for repo in users-api recipes-api matching-api notifications-api \
-            notifications-consumer shoppinglist-api shoppinglist-consumer; do
-  aws ecr create-repository --repository-name "miamatch-$repo" --region eu-west-3
-done
+aws ecr create-repository --repository-name miamatch-<service> --region eu-west-3
 ```
 
-Le pipeline ne cree jamais de repo : une faute de frappe dans une variable doit echouer,
-pas fabriquer un depot fantome.
+Le pipeline ne cree jamais de repo : une faute de frappe doit echouer, pas fabriquer un
+depot fantome.
 
 ### 4. Variables de repo GitHub
 
@@ -182,7 +184,7 @@ pas des secrets : elles ne contiennent aucune donnee sensible.
 | `NOTIFICATIONS_CONSUMER_LAMBDA` | oui | idem |
 | `SHOPPINGLIST_API_LAMBDA` | oui | idem |
 | `SHOPPINGLIST_CONSUMER_LAMBDA` | oui | idem |
-| `<SERVICE>_ECR_REPOSITORY` | non | Repo ECR du service ; a defaut, le nom de la Lambda est reutilise |
+| `<SERVICE>_ECR_REPOSITORY` | non | Defaut `miamatch-<service>`, le nom des repos existants ; utile seulement en cas de renommage |
 | `WEB_BUCKET` | non | Defaut `miamatch-web-987119353333` |
 | `WEB_CLOUDFRONT_DISTRIBUTION_ID` | non | Defaut `E33JYQMGL6YN25` |
 

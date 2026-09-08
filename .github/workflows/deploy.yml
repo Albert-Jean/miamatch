@@ -68,37 +68,40 @@ jobs:
     strategy:
       # Un service qui echoue ne doit pas empecher les autres d'arriver a jour :
       # ils sont deployes independamment.
+      #
+      # Les repos ECR existants suivent tous la convention miamatch-<service> :
+      # la variable <SERVICE>_ECR_REPOSITORY n'est la que pour un renommage.
       fail-fast: false
       matrix:
         include:
           - service: users-api
             dockerfile: src/Services/Users/Users.Api/Dockerfile
             lambda: ${{ vars.USERS_API_LAMBDA }}
-            ecr: ${{ vars.USERS_API_ECR_REPOSITORY || vars.USERS_API_LAMBDA }}
+            ecr: ${{ vars.USERS_API_ECR_REPOSITORY || 'miamatch-users-api' }}
           - service: recipes-api
             dockerfile: src/Services/Recipes/Recipes.Api/Dockerfile
             lambda: ${{ vars.RECIPES_API_LAMBDA }}
-            ecr: ${{ vars.RECIPES_API_ECR_REPOSITORY || vars.RECIPES_API_LAMBDA }}
+            ecr: ${{ vars.RECIPES_API_ECR_REPOSITORY || 'miamatch-recipes-api' }}
           - service: matching-api
             dockerfile: src/Services/Matching/Matching.Api/Dockerfile
             lambda: ${{ vars.MATCHING_API_LAMBDA }}
-            ecr: ${{ vars.MATCHING_API_ECR_REPOSITORY || vars.MATCHING_API_LAMBDA }}
+            ecr: ${{ vars.MATCHING_API_ECR_REPOSITORY || 'miamatch-matching-api' }}
           - service: notifications-api
             dockerfile: src/Services/Notifications/Notifications.Api/Dockerfile
             lambda: ${{ vars.NOTIFICATIONS_API_LAMBDA }}
-            ecr: ${{ vars.NOTIFICATIONS_API_ECR_REPOSITORY || vars.NOTIFICATIONS_API_LAMBDA }}
+            ecr: ${{ vars.NOTIFICATIONS_API_ECR_REPOSITORY || 'miamatch-notifications-api' }}
           - service: notifications-consumer
             dockerfile: src/Services/Notifications/Notifications.Consumer/Dockerfile
             lambda: ${{ vars.NOTIFICATIONS_CONSUMER_LAMBDA }}
-            ecr: ${{ vars.NOTIFICATIONS_CONSUMER_ECR_REPOSITORY || vars.NOTIFICATIONS_CONSUMER_LAMBDA }}
+            ecr: ${{ vars.NOTIFICATIONS_CONSUMER_ECR_REPOSITORY || 'miamatch-notifications-consumer' }}
           - service: shoppinglist-api
             dockerfile: src/Services/ShoppingList/ShoppingList.Api/Dockerfile
             lambda: ${{ vars.SHOPPINGLIST_API_LAMBDA }}
-            ecr: ${{ vars.SHOPPINGLIST_API_ECR_REPOSITORY || vars.SHOPPINGLIST_API_LAMBDA }}
+            ecr: ${{ vars.SHOPPINGLIST_API_ECR_REPOSITORY || 'miamatch-shoppinglist-api' }}
           - service: shoppinglist-consumer
             dockerfile: src/Services/ShoppingList/ShoppingList.Consumer/Dockerfile
             lambda: ${{ vars.SHOPPINGLIST_CONSUMER_LAMBDA }}
-            ecr: ${{ vars.SHOPPINGLIST_CONSUMER_ECR_REPOSITORY || vars.SHOPPINGLIST_CONSUMER_LAMBDA }}
+            ecr: ${{ vars.SHOPPINGLIST_CONSUMER_ECR_REPOSITORY || 'miamatch-shoppinglist-consumer' }}
     steps:
       - uses: actions/checkout@v4
 
